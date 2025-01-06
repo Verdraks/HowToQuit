@@ -53,6 +53,15 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Transformer"",
+                    ""type"": ""Value"",
+                    ""id"": ""82440862-9d3b-4f44-afaa-e6305b6d1b63"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,39 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""11e63f4e-7d2f-4212-9cdd-6a3cd634903c"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""dcca3ee0-5459-467e-b9d3-a96901a1c458"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f32d557a-5e5d-48a6-8496-9832c666e793"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Transformer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -143,6 +185,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
+        m_Player_Transformer = m_Player.FindAction("Transformer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +250,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Grab;
+    private readonly InputAction m_Player_Transformer;
     public struct PlayerActions
     {
         private @InputAction_Controller m_Wrapper;
@@ -214,6 +258,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Grab => m_Wrapper.m_Player_Grab;
+        public InputAction @Transformer => m_Wrapper.m_Player_Transformer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +277,9 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
             @Grab.started += instance.OnGrab;
             @Grab.performed += instance.OnGrab;
             @Grab.canceled += instance.OnGrab;
+            @Transformer.started += instance.OnTransformer;
+            @Transformer.performed += instance.OnTransformer;
+            @Transformer.canceled += instance.OnTransformer;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -245,6 +293,9 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
             @Grab.started -= instance.OnGrab;
             @Grab.performed -= instance.OnGrab;
             @Grab.canceled -= instance.OnGrab;
+            @Transformer.started -= instance.OnTransformer;
+            @Transformer.performed -= instance.OnTransformer;
+            @Transformer.canceled -= instance.OnTransformer;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -267,5 +318,6 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
+        void OnTransformer(InputAction.CallbackContext context);
     }
 }

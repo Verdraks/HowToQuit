@@ -8,11 +8,12 @@ public class Controller : MonoBehaviour
     [SerializeField] private RSE_InputFire rseInputFire;
     [SerializeField] private RSE_InputGrab rseInputGrab;
     [SerializeField] private RSE_InputMove rseInputMove;
+    [SerializeField] private RSE_InputTransformer rseInputTransformer;
     
 
     private InputAction_Controller _inputActionController;
 
-    private void Start()
+    private void Awake()
     {
         _inputActionController = new InputAction_Controller();
     }
@@ -23,12 +24,17 @@ public class Controller : MonoBehaviour
         _inputActionController.Player.Fire.performed += OnFirePerformed;
         _inputActionController.Player.Grab.performed += OnGrabPerformed;
         _inputActionController.Player.Move.performed += OnMovePerformed;
+        _inputActionController.Player.Transformer.performed += OnTransformerPerformed;
     }
+
     
+
     private void OnDisable()
     {
         _inputActionController.Player.Fire.performed -= OnFirePerformed;
         _inputActionController.Player.Grab.performed -= OnGrabPerformed;
+        _inputActionController.Player.Move.performed -= OnMovePerformed;
+        _inputActionController.Player.Transformer.performed -= OnTransformerPerformed;
         _inputActionController.Disable();
     }
     
@@ -47,6 +53,13 @@ public class Controller : MonoBehaviour
     private void OnGrabPerformed(InputAction.CallbackContext callbackContext)
     {
         rseInputGrab.Call();
+    }
+    
+    private void OnTransformerPerformed(InputAction.CallbackContext obj)
+    {
+        var value = (int)obj.ReadValue<float>();
+        if (value == 0) return;
+        rseInputTransformer.Call(value);
     }
 
 }
