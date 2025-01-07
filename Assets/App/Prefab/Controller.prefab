@@ -65,4 +65,5 @@ MonoBehaviour:
   - {fileID: 8716150100335919129, guid: 73917e2e998b3af4a90ca7086cb62c71, type: 3}
   - {fileID: 4690771527108763931, guid: e1796f64e89da654abdd3eb123296c75, type: 3}
   - {fileID: 2046377759103236011, guid: 47243c16046ed914d85ee2c94cc744be, type: 3}
+  rsoSpawnPoint: {fileID: 11400000, guid: ea619d8a50d149f49abc5713ba6eed21, type: 2}
   rseInputTransformer: {fileID: 11400000, guid: d4f94c81eadc1aa42b0ddca7a5677068, type: 2}

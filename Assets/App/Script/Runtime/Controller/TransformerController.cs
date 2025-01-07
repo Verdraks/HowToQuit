@@ -8,6 +8,7 @@ public class TransformerController : MonoBehaviour
     [SerializeField] List<GameObject> transformerPrefabs = new();
 
     [Header("References")]
+    [SerializeField] private RSO_SpawnPoint rsoSpawnPoint;
     [SerializeField] private RSE_InputTransformer rseInputTransformer;
 
     private int _indexTransformerPrefab;
@@ -45,7 +46,7 @@ public class TransformerController : MonoBehaviour
         {
             Destroy(_transformerInst);
         }
-        _transformerInst = Instantiate(transformerPrefabs[_indexTransformerPrefab]);
+        _transformerInst = Instantiate(transformerPrefabs[_indexTransformerPrefab],rsoSpawnPoint.Value,Quaternion.identity);
     }
     
 }

@@ -23,7 +23,6 @@ public class Controller : MonoBehaviour
         _inputActionController.Enable();
         _inputActionController.Player.Fire.performed += OnFirePerformed;
         _inputActionController.Player.Grab.performed += OnGrabPerformed;
-        _inputActionController.Player.Move.performed += OnMovePerformed;
         _inputActionController.Player.Transformer.performed += OnTransformerPerformed;
     }
 
@@ -33,14 +32,18 @@ public class Controller : MonoBehaviour
     {
         _inputActionController.Player.Fire.performed -= OnFirePerformed;
         _inputActionController.Player.Grab.performed -= OnGrabPerformed;
-        _inputActionController.Player.Move.performed -= OnMovePerformed;
         _inputActionController.Player.Transformer.performed -= OnTransformerPerformed;
         _inputActionController.Disable();
     }
-    
-    private void OnMovePerformed(InputAction.CallbackContext obj)
+
+    private void Update()
     {
-        var value = obj.ReadValue<Vector2>();
+        OnMovePerformed();
+    }
+
+    private void OnMovePerformed()
+    {
+        var value =_inputActionController.Player.Move.ReadValue<Vector2>();
         if (value == Vector2.zero) return;
         rseInputMove.Call(value);
     }
