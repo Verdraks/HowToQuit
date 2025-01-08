@@ -1,11 +1,12 @@
 using UnityEngine;
 public abstract class PhysicController : MonoBehaviour
 {
-    [Header("Parameters")]
+    [Header("Settings")]
     [SerializeField] protected float walkSpeed = 2.0f;
     
     [Header("References")]
     [SerializeField] protected Rigidbody2D rb;
+    [Header("Input")]
     [SerializeField] protected RSE_InputMove rseInputMove;
     
     protected  virtual void OnEnable()
@@ -20,6 +21,7 @@ public abstract class PhysicController : MonoBehaviour
 
     protected virtual void OnInputMove(Vector2 value)
     {
+        value.y = 0;
         rb.AddForce(value * walkSpeed);
     }
     

@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class Controller : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Output")]
     [SerializeField] private RSE_InputFire rseInputFire;
-    [SerializeField] private RSE_InputGrab rseInputGrab;
+    [SerializeField] private RSE_InputResize rseInputResize;
     [SerializeField] private RSE_InputMove rseInputMove;
     [SerializeField] private RSE_InputTransformer rseInputTransformer;
     
@@ -22,16 +23,15 @@ public class Controller : MonoBehaviour
     {
         _inputActionController.Enable();
         _inputActionController.Player.Fire.performed += OnFirePerformed;
-        _inputActionController.Player.Grab.performed += OnGrabPerformed;
+        _inputActionController.Player.Resize.performed += OnResizePerformed;
         _inputActionController.Player.Transformer.performed += OnTransformerPerformed;
     }
-
     
 
     private void OnDisable()
     {
         _inputActionController.Player.Fire.performed -= OnFirePerformed;
-        _inputActionController.Player.Grab.performed -= OnGrabPerformed;
+        _inputActionController.Player.Resize.performed -= OnResizePerformed;
         _inputActionController.Player.Transformer.performed -= OnTransformerPerformed;
         _inputActionController.Disable();
     }
@@ -48,14 +48,16 @@ public class Controller : MonoBehaviour
         rseInputMove.Call(value);
     }
 
-    private void OnFirePerformed(InputAction.CallbackContext callbackContext)
+    private void OnFirePerformed(InputAction.CallbackContext obj)
     {
         rseInputFire.Call();
     }
 
-    private void OnGrabPerformed(InputAction.CallbackContext callbackContext)
+    private void OnResizePerformed(InputAction.CallbackContext obj)
     {
-        rseInputGrab.Call();
+        var value = (int)obj.ReadValue<float>();
+        if (value == 0) return;
+        rseInputResize.Call(value);
     }
     
     private void OnTransformerPerformed(InputAction.CallbackContext obj)

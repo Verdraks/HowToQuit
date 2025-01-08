@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
-    [Header("Parameters")]
+    [Header("Settings")]
     [SerializeField] private bool spawnPointStart;
     
     [Header("References")]

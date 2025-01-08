@@ -1,13 +1,15 @@
 using UnityEngine;
 public class TriangleController : PhysicController
 {
-    [Header("Parameters")]
+    [Header("Settings")]
     [SerializeField] private float shootCooldown;
     
     [Header("References")]
-    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform rootBulletShoot;
+    [Header("Input")]
     [SerializeField] private RSE_InputFire rseInputFire;
+    [Header("Output")]
+    [SerializeField] private RSE_BulletFire rseBulletFire;
 
     private bool _canShoot = true;
         
@@ -26,10 +28,8 @@ public class TriangleController : PhysicController
     private void OnInputFire()
     {
         if (!_canShoot) return;
-        print("shoot");
-        
-        // Instantiate(bulletPrefab,rootBulletShoot.position,Quaternion.identity);
-        // _canShoot = false;
-        // StartCoroutine(Utils.Delay(shootCooldown, ()=> _canShoot = true));
+        rseBulletFire.Call(rootBulletShoot.position,Quaternion.identity);
+        _canShoot = false;
+        StartCoroutine(Utils.Delay(shootCooldown, ()=> _canShoot = true));
     }
 }

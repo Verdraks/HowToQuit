@@ -4,11 +4,10 @@ using UnityEngine.Serialization;
 
 public class CircleController : PhysicController
 {
-    [Header("Parameters")]
+    [Header("Settings")]
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float distanceDetectionMur = 0.5f;
     [SerializeField] private float speed = 3f;
-
     
     private bool _closeToWall;
     

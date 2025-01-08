@@ -46,7 +46,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Grab"",
+                    ""name"": ""Resize"",
                     ""type"": ""Button"",
                     ""id"": ""b86e2af1-6715-41be-a42a-6fc53264c31b"",
                     ""expectedControlType"": ""Button"",
@@ -73,17 +73,6 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c90dcc3a-8e9f-41af-a3b9-a6101f001ba3"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -174,6 +163,39 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
                     ""action"": ""Transformer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""3969d54b-0ede-4636-bdc8-8262b41b5d26"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Resize"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cdd4fc45-acb1-48cf-b60d-31913202dae7"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Resize"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9990e7e6-9a53-4fff-a370-0c667a97528f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Resize"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -184,7 +206,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
-        m_Player_Grab = m_Player.FindAction("Grab", throwIfNotFound: true);
+        m_Player_Resize = m_Player.FindAction("Resize", throwIfNotFound: true);
         m_Player_Transformer = m_Player.FindAction("Transformer", throwIfNotFound: true);
     }
 
@@ -249,7 +271,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Fire;
-    private readonly InputAction m_Player_Grab;
+    private readonly InputAction m_Player_Resize;
     private readonly InputAction m_Player_Transformer;
     public struct PlayerActions
     {
@@ -257,7 +279,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
         public PlayerActions(@InputAction_Controller wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
-        public InputAction @Grab => m_Wrapper.m_Player_Grab;
+        public InputAction @Resize => m_Wrapper.m_Player_Resize;
         public InputAction @Transformer => m_Wrapper.m_Player_Transformer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -274,9 +296,9 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
-            @Grab.started += instance.OnGrab;
-            @Grab.performed += instance.OnGrab;
-            @Grab.canceled += instance.OnGrab;
+            @Resize.started += instance.OnResize;
+            @Resize.performed += instance.OnResize;
+            @Resize.canceled += instance.OnResize;
             @Transformer.started += instance.OnTransformer;
             @Transformer.performed += instance.OnTransformer;
             @Transformer.canceled += instance.OnTransformer;
@@ -290,9 +312,9 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
-            @Grab.started -= instance.OnGrab;
-            @Grab.performed -= instance.OnGrab;
-            @Grab.canceled -= instance.OnGrab;
+            @Resize.started -= instance.OnResize;
+            @Resize.performed -= instance.OnResize;
+            @Resize.canceled -= instance.OnResize;
             @Transformer.started -= instance.OnTransformer;
             @Transformer.performed -= instance.OnTransformer;
             @Transformer.canceled -= instance.OnTransformer;
@@ -317,7 +339,7 @@ public partial class @InputAction_Controller: IInputActionCollection2, IDisposab
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
-        void OnGrab(InputAction.CallbackContext context);
+        void OnResize(InputAction.CallbackContext context);
         void OnTransformer(InputAction.CallbackContext context);
     }
 }

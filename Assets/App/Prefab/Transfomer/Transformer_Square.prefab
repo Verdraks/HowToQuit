@@ -130,12 +130,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3387eded3fa4484fbb07d97d7b461d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 2
   rb: {fileID: 5877387154981553339}
-  sizeMin: 0
-  sizeMax: 1.5
-  scaleIncrement: 0.5
-  root: {fileID: 1737793876928604255}
   rseInputMove: {fileID: 11400000, guid: 21738ec07079dce4c9ee457ab6441b98, type: 2}
+  sizeMin: 0.5
+  sizeMax: 2
+  scaleIncrement: 0.5
+  rseInputResize: {fileID: 11400000, guid: 544ab789a7135b7438a689e6e6077a15, type: 2}
+  root: {fileID: 1737793876928604255}
 --- !u!50 &5877387154981553339
 Rigidbody2D:
   serializedVersion: 4

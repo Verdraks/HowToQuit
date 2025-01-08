@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Grab",
+                    "name": "Resize",
                     "type": "Button",
                     "id": "b86e2af1-6715-41be-a42a-6fc53264c31b",
                     "expectedControlType": "Button",
@@ -51,17 +51,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c90dcc3a-8e9f-41af-a3b9-a6101f001ba3",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -150,6 +139,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Transformer",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "3969d54b-0ede-4636-bdc8-8262b41b5d26",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Resize",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "cdd4fc45-acb1-48cf-b60d-31913202dae7",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Resize",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9990e7e6-9a53-4fff-a370-0c667a97528f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Resize",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rseInputFire: {fileID: 11400000, guid: 70bb6ca0bc5a5f1409bfd2de169cb2e9, type: 2}
-  rseInputGrab: {fileID: 11400000, guid: 544ab789a7135b7438a689e6e6077a15, type: 2}
+  rseInputResize: {fileID: 11400000, guid: 544ab789a7135b7438a689e6e6077a15, type: 2}
   rseInputMove: {fileID: 11400000, guid: 21738ec07079dce4c9ee457ab6441b98, type: 2}
   rseInputTransformer: {fileID: 11400000, guid: d4f94c81eadc1aa42b0ddca7a5677068, type: 2}
 --- !u!114 &1726722284886345491

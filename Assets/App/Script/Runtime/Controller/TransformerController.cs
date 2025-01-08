@@ -9,6 +9,7 @@ public class TransformerController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private RSO_SpawnPoint rsoSpawnPoint;
+    [Header("Input")]
     [SerializeField] private RSE_InputTransformer rseInputTransformer;
 
     private int _indexTransformerPrefab;
@@ -19,7 +20,7 @@ public class TransformerController : MonoBehaviour
     private void InitComponent()
     {
         _indexTransformerPrefab = transformerPrefabs.Count / 2;
-        SwitchTransformerPrefab();
+        SwitchTransformerPrefab(rsoSpawnPoint.Value);
     }
 
     private void OnEnable()
@@ -37,16 +38,16 @@ public class TransformerController : MonoBehaviour
         int oldValue = _indexTransformerPrefab;
         _indexTransformerPrefab = Mathf.Clamp(_indexTransformerPrefab + value, 0,transformerPrefabs.Count-1);
         if (oldValue != _indexTransformerPrefab)
-            SwitchTransformerPrefab();
+            SwitchTransformerPrefab(_transformerInst? _transformerInst.transform.position : rsoSpawnPoint.Value);
     }
 
-    private void SwitchTransformerPrefab()
+    private void SwitchTransformerPrefab(Vector3 position)
     {
         if (_transformerInst != null)
         {
             Destroy(_transformerInst);
         }
-        _transformerInst = Instantiate(transformerPrefabs[_indexTransformerPrefab],rsoSpawnPoint.Value,Quaternion.identity);
+        _transformerInst = Instantiate(transformerPrefabs[_indexTransformerPrefab],position,Quaternion.identity);
     }
     
 }
