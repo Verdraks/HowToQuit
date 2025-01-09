@@ -58,4 +58,25 @@ public static class Utils
         action.Invoke();
     }
     #endregion
+
+    #region Others
+
+    public static Quaternion SmoothDampRotation(Quaternion current, Quaternion target, ref Quaternion velocity, float smoothTime)
+    {
+        float angle = 0.0f;
+        Vector3 axis = Vector3.zero;
+        Quaternion deltaRotation = target * Quaternion.Inverse(current);
+        deltaRotation.ToAngleAxis(out angle, out axis);
+
+        if (angle > 180.0f)
+        {
+            angle -= 360.0f;
+        }
+
+        float smoothedAngle = Mathf.SmoothDampAngle(0.0f, angle, ref smoothTime, Time.deltaTime);
+
+        return Quaternion.AngleAxis(smoothedAngle, axis) * current;
+    }
+
+    #endregion
 }

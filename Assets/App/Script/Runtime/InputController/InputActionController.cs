@@ -62,6 +62,15 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""1b3cadb6-eb54-4edf-ade4-48052dbf6f66"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3515d691-2aee-4a03-a74a-badef24dafe5"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -186,6 +206,7 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
         m_Player_SwapController = m_Player.FindAction("SwapController", throwIfNotFound: true);
         m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +272,7 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
     private readonly InputAction m_Player_SwapController;
     private readonly InputAction m_Player_Ability;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Look;
     public struct PlayerActions
     {
         private @InputActionController m_Wrapper;
@@ -259,6 +281,7 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
         public InputAction @SwapController => m_Wrapper.m_Player_SwapController;
         public InputAction @Ability => m_Wrapper.m_Player_Ability;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -280,6 +303,9 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -296,6 +322,9 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -319,5 +348,6 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
         void OnSwapController(InputAction.CallbackContext context);
         void OnAbility(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

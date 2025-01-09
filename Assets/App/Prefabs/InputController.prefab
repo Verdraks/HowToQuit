@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bb1287218c3c34e99bd09ce22f8d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rseInputLook: {fileID: 11400000, guid: 8272bd379dc209143bb0a311c7de36a1, type: 2}
   rseInputAbility: {fileID: 11400000, guid: fea1a9df3e97c6047bb71ac6db3e7bd6, type: 2}
   rseInputMove: {fileID: 11400000, guid: 9a0b483dc5c652542a0e0d8b346b8fd6, type: 2}
   rseInputSwapController: {fileID: 11400000, guid: 2f2b3fdf9e351ef4c8de786c68fb1eea,
