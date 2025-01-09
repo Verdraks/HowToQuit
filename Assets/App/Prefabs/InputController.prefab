@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &49605962104098694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6282463333142205861}
+  - component: {fileID: 1695616180275084390}
+  - component: {fileID: 967496351620363899}
+  m_Layer: 0
+  m_Name: InputController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6282463333142205861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49605962104098694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1695616180275084390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49605962104098694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bb1287218c3c34e99bd09ce22f8d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rseInputAbility: {fileID: 11400000, guid: fea1a9df3e97c6047bb71ac6db3e7bd6, type: 2}
+  rseInputMove: {fileID: 11400000, guid: 9a0b483dc5c652542a0e0d8b346b8fd6, type: 2}
+  rseInputSwapController: {fileID: 11400000, guid: 2f2b3fdf9e351ef4c8de786c68fb1eea,
+    type: 2}
+  rseInputJump: {fileID: 11400000, guid: b36dc25aab8a1264fb63e454cc403d3c, type: 2}
+--- !u!114 &967496351620363899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49605962104098694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffd87820eddb484292bb68ab8937f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerPrefabs:
+  - {fileID: 3968496131724466461, guid: 34b554fa91e40ec478c509f2736b7111, type: 3}
+  - {fileID: 2502566689650494403, guid: 74af7268e02461a48a8d76334c9d911b, type: 3}
+  - {fileID: 5458675368429869566, guid: 918197f5fb94f244d94057df1df04a0a, type: 3}
+  rsoSpawnPosition: {fileID: 11400000, guid: 672c349695aec8b4989f34aaa4cd8f72, type: 2}
+  rseInputSwapController: {fileID: 11400000, guid: 2f2b3fdf9e351ef4c8de786c68fb1eea,
+    type: 2}
