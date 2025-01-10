@@ -4,19 +4,16 @@ using UnityEngine.Serialization;
 
 public abstract class PhysicController : MonoBehaviour
 {
-    [Header("Settings")] 
+    [Header("Settings")]
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float speedSprinting = 0.5f;
-    
+    [SerializeField] private float sprintMultiplier = 1.5f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float jumpCooldown = 0.5f;
-    [SerializeField] private float distanceCheckGround = 0.2f;
-    [SerializeField] private Vector3 offsetCheckGround;
-    [SerializeField] private LayerMask groundLayer;
-    
-    [SerializeField] private float smoothTime = 0.2f;
-    [SerializeField] private float gravityFallingMultiplier = 2f;
-    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float coyoteeTime = 0.2f;
+    [SerializeField] private float inputBufferTime = 0.2f;
+    [SerializeField] private float fallAcceleration = 2f;
+    [SerializeField] private float smoothStopTime = 0.2f;
+    [SerializeField] private float rotationSpeed = 360f;
 
     [Header("References")]
     [SerializeField] private Rigidbody rb;
@@ -25,128 +22,135 @@ public abstract class PhysicController : MonoBehaviour
     [Header("Input")]
     [SerializeField] private RSE_InputMove rseInputMove;
     [SerializeField] private RSE_InputJump rseInputJump;
-    [SerializeField] private RSE_InputAbility rseInputAbility;
     [SerializeField] private RSE_InputSprint rseInputSprint;
 
-    private bool _canJump = true;
-    private Vector3 _movement;
-    private Quaternion _currentRotationVelocity;
-    private float _currentSpeed;
-    private float _velocity;
-    private bool _isSprinting;
     private bool _isGrounded;
+    private bool _canJump = true;
+    private bool _bufferTimerRunning;
+    private bool _coyoteeTimerRunning;
+    private Vector3 _moveDirection;
+    private Vector3 _velocity;
+    private Vector3 _currentSmoothVelocity;
+    private static readonly float ZeroF = 0f;
+    
 
-    private RaycastHit[] _hit = new RaycastHit[1];
-    private Ray _ray = new(Vector3.zero, Vector3.down);
-    private float _jumpVelocity;
-    
-    private const float ZeroF = 0.0f;
-    
-    
-    protected virtual void OnEnable()
+    private void OnEnable()
     {
         rseInputMove.action += OnInputMove;
-        rseInputAbility.action += OnInputAbility;
-        rseInputJump.action += OnInputJump;
+        rseInputJump.action += OnJumpInput;
         rseInputSprint.action += OnInputSprint;
     }
 
-
-    protected virtual void OnDisable()
+    private void OnDisable()
     {
         rseInputMove.action -= OnInputMove;
-        rseInputAbility.action -= OnInputAbility;
-        rseInputJump.action -= OnInputJump;
+        rseInputJump.action -= OnJumpInput;
         rseInputSprint.action -= OnInputSprint;
     }
+
+    private void Update()
+    {
+        CheckGrounded();
+        HandleJumpBuffer();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+        ApplyGravity();
+    }
+
+    private void OnInputMove(Vector2 input)
+    {
+        _moveDirection = new Vector3(input.x, 0, input.y).normalized;
+    }
+
+    private void OnJumpInput()
+    {
+        _coyoteeTimerRunning = true;
+        StartCoroutine(Utils.Delay(coyoteeTime,()=> _coyoteeTimerRunning = false));
+    }
     
-    private void OnInputSprint(bool value)
+    private void OnInputSprint(bool isSprinting)
     {
-        _isSprinting = value;
-    }
+        speed *= isSprinting ? sprintMultiplier : 1f / sprintMultiplier;
+    }    
+    
+    private void CheckGrounded()
+    {
+        RaycastHit hit;
+        var wasGrounded = _isGrounded;
+        _isGrounded = Physics.RaycastNonAlloc(new Ray(transform.position, Vector3.down), new RaycastHit[1], 0.1f) > 0;
 
-    protected virtual void OnInputMove(Vector2 value)
-    {
-        _movement = new Vector3(value.x, 0f, value.y);
+        if (!_isGrounded && wasGrounded)
+        {
+            _bufferTimerRunning = true;
+            StartCoroutine(Utils.Delay(inputBufferTime,()=> _bufferTimerRunning = false));
+        }
     }
+    
 
-    protected void FixedUpdate()
+    private void Move()
     {
-        CheckTouchGround();
-        HandleMovement();
-    }
+        var adjustedDirection = Quaternion.AngleAxis(rsoCameraTransform.Value.Rotation.eulerAngles.y, Vector3.up) * _moveDirection;
 
-    private void CheckTouchGround()
-    {
-        _ray.origin = rb.position + offsetCheckGround;
-        _isGrounded = Physics.RaycastNonAlloc(_ray, _hit, distanceCheckGround, groundLayer) > 0;
-    }
-
-    void HandleMovement()
-    {
-        if (!_isGrounded) HandleFallingGravity();
-        
-        // Rotate movement direction to match camera rotation
-        var adjustedDirection = Quaternion.AngleAxis(rsoCameraTransform.Value.Rotation.eulerAngles.y, Vector3.up) * _movement;
-            
-        if (adjustedDirection.magnitude > ZeroF) {
+        if (adjustedDirection.magnitude > ZeroF)
+        {
             HandleRotation(adjustedDirection);
-            HandleHorizontalMovement(adjustedDirection);
-            SmoothSpeed(adjustedDirection.magnitude);
-        } else {
-            SmoothSpeed(ZeroF);
-                
-            // Reset horizontal velocity for a snappy stop
+            Vector3 targetVelocity = adjustedDirection * speed;
+            rb.velocity = new Vector3(targetVelocity.x, rb.velocity.y, targetVelocity.z);
+        }
+        else
+        {
             rb.velocity = new Vector3(ZeroF, rb.velocity.y, ZeroF);
         }
     }
 
-    private void HandleFallingGravity()
+    private void HandleRotation(Vector3 adjustedDirection)
     {
-        _jumpVelocity += Physics.gravity.y * gravityFallingMultiplier * Time.fixedDeltaTime;
-        rb.velocity = new Vector3(rb.velocity.x, _jumpVelocity, rb.velocity.z);
-    }
-
-    void HandleHorizontalMovement(Vector3 adjustedDirection) {
-        // Move the player
-        Vector3 velocity = adjustedDirection * ((_isSprinting ? speedSprinting : speed ) * Time.fixedDeltaTime);
-        rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
-    }
-
-    void HandleRotation(Vector3 adjustedDirection) {
-        // Adjust rotation to match movement direction
         var targetRotation = Quaternion.LookRotation(adjustedDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, smoothStopTime * Time.deltaTime);
     }
 
-    void SmoothSpeed(float value) {
-        _currentSpeed = Mathf.SmoothDamp(_currentSpeed, value, ref _velocity, smoothTime);
+    private void ApplyGravity()
+    {
+        if (!_isGrounded)
+        {
+            rb.velocity += Vector3.down * (fallAcceleration * Time.fixedDeltaTime);
+        }
+    }
+
+    
+    private void HandleJumpBuffer()
+    {
+        if (!_canJump) return;
+        if (_isGrounded) Jump();
+        else if (!_isGrounded && _coyoteeTimerRunning) Jump();
+        
+        // if (Time.time - _lastJumpInputTime <= inputBufferTime &&
+        //     Time.time - _lastGroundedTime <= coyoteeTime &&
+        //     !_canJump)
+        // {
+        //     Jump();
+        // }
     }
     
-    protected virtual void OnInputJump()
+    private void Jump()
     {
-        if (!_isGrounded || !_canJump) return;
-        _jumpVelocity = jumpForce;
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
         _canJump = false;
         StartCoroutine(Utils.Delay(jumpCooldown, () => _canJump = true));
-
     }
-    
+
     protected abstract void OnInputAbility();
     
-    public void Teleport(Vector3 position, Quaternion quaternion)
+    public void Teleport(Vector3 position, Quaternion rotation)
     {
-        transform.position = position;
-        rb.MovePosition(position);
-        rb.MoveRotation(quaternion);
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+        rb.position = position;
+        transform.position = position;
+        transform.rotation = rotation;
     }
 
-    protected virtual void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(_ray.origin, _ray.origin + _ray.direction * distanceCheckGround);
-    }
 }

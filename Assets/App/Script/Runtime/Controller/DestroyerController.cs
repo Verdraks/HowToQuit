@@ -26,9 +26,8 @@ public class DestroyerController : PhysicController
         }
     }
 
-    protected override void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
-        base.OnDrawGizmos();
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(positionCast,sizeCast);
     }
