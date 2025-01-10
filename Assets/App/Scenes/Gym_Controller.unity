@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 1833162642}
   - component: {fileID: 1833162641}
   - component: {fileID: 1833162640}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,6 +620,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776122399302275694, guid: b2a126afa56a53345abb013fdcb46def,
+        type: 3}
+      propertyPath: spawnPointOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -637,11 +642,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InputController
-      objectReference: {fileID: 0}
-    - target: {fileID: 967496351620363899, guid: 67697b2d48deee14ab9237a77191b881,
-        type: 3}
-      propertyPath: controllerPrefabs.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6282463333142205861, guid: 67697b2d48deee14ab9237a77191b881,
         type: 3}

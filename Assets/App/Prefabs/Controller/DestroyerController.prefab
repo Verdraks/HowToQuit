@@ -49,15 +49,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 250
+  speedSprinting: 500
   jumpForce: 9
-  smoothTime: 0.2
   jumpCooldown: 0.5
+  distanceCheckGround: 0.36
+  offsetCheckGround: {x: 0, y: -0.84, z: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 72
+  smoothTime: 0.63
+  gravityFallingMultiplier: 1.91
   rotationSpeed: 10
   rb: {fileID: 7023068435073724191}
   rsoCameraTransform: {fileID: 11400000, guid: 6d7afe7f892398b4084a4d709ce0f2ab, type: 2}
   rseInputMove: {fileID: 11400000, guid: 9a0b483dc5c652542a0e0d8b346b8fd6, type: 2}
   rseInputJump: {fileID: 11400000, guid: b36dc25aab8a1264fb63e454cc403d3c, type: 2}
   rseInputAbility: {fileID: 11400000, guid: fea1a9df3e97c6047bb71ac6db3e7bd6, type: 2}
+  rseInputSprint: {fileID: 11400000, guid: 18ad135768700244cab4c5345fc53f44, type: 2}
   sizeCast: {x: 1, y: 1, z: 1}
   positionCast: {x: 0, y: 0, z: 1.1}
   distanceCast: 5
@@ -75,7 +83,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.8
+  m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -89,7 +97,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!136 &3888960532908544675
@@ -99,7 +107,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3968496131724466461}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7ac83f26fe66d26468d5b08fe2ab5a08, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

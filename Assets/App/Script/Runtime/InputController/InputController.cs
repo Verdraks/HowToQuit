@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     [SerializeField] private RSE_InputMove rseInputMove;
     [SerializeField] private RSE_InputSwapController rseInputSwapController;
     [SerializeField] private RSE_InputJump rseInputJump;
+    [SerializeField] private RSE_InputSprint rseInputSprint;
 
     private InputActionController _inputActionController;
 
@@ -22,6 +23,9 @@ public class InputController : MonoBehaviour
         _inputActionController.Player.SwapController.performed += OnInputSwapControllerPerformed;
         _inputActionController.Player.Jump.performed += OnInputJumpPerformed;
         _inputActionController.Player.Look.performed += OnInputLookPerformed;
+        
+        _inputActionController.Player.Sprint.started += OnInputSprintCall;
+        _inputActionController.Player.Sprint.canceled += OnInputSprintCall;
     }
 
     private void OnDisable()
@@ -30,12 +34,21 @@ public class InputController : MonoBehaviour
         _inputActionController.Player.SwapController.performed -= OnInputSwapControllerPerformed;
         _inputActionController.Player.Jump.performed -= OnInputJumpPerformed;
         _inputActionController.Player.Look.performed -= OnInputLookPerformed;
+        
+        _inputActionController.Player.Sprint.started -= OnInputSprintCall;
+        _inputActionController.Player.Sprint.canceled -= OnInputSprintCall;
+        
         _inputActionController.Disable();
     }
 
     private void Update()
     {
         OnInputMovePerformed();
+    }
+
+    private void OnInputSprintCall(InputAction.CallbackContext context)
+    {
+        rseInputSprint.Call(context.started);
     }
 
     private void OnInputLookPerformed(InputAction.CallbackContext context)

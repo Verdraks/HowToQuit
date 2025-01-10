@@ -6,9 +6,16 @@ public abstract class PhysicController : MonoBehaviour
 {
     [Header("Settings")] 
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float speedSprinting = 0.5f;
+    
     [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float smoothTime = 0.2f;
     [SerializeField] private float jumpCooldown = 0.5f;
+    [SerializeField] private float distanceCheckGround = 0.2f;
+    [SerializeField] private Vector3 offsetCheckGround;
+    [SerializeField] private LayerMask groundLayer;
+    
+    [SerializeField] private float smoothTime = 0.2f;
+    [SerializeField] private float gravityFallingMultiplier = 2f;
     [SerializeField] private float rotationSpeed = 10f;
 
     [Header("References")]
@@ -19,13 +26,20 @@ public abstract class PhysicController : MonoBehaviour
     [SerializeField] private RSE_InputMove rseInputMove;
     [SerializeField] private RSE_InputJump rseInputJump;
     [SerializeField] private RSE_InputAbility rseInputAbility;
+    [SerializeField] private RSE_InputSprint rseInputSprint;
 
     private bool _canJump = true;
     private Vector3 _movement;
     private Quaternion _currentRotationVelocity;
     private float _currentSpeed;
     private float _velocity;
+    private bool _isSprinting;
+    private bool _isGrounded;
 
+    private RaycastHit[] _hit = new RaycastHit[1];
+    private Ray _ray = new(Vector3.zero, Vector3.down);
+    private float _jumpVelocity;
+    
     private const float ZeroF = 0.0f;
     
     
@@ -34,13 +48,21 @@ public abstract class PhysicController : MonoBehaviour
         rseInputMove.action += OnInputMove;
         rseInputAbility.action += OnInputAbility;
         rseInputJump.action += OnInputJump;
+        rseInputSprint.action += OnInputSprint;
     }
+
 
     protected virtual void OnDisable()
     {
         rseInputMove.action -= OnInputMove;
         rseInputAbility.action -= OnInputAbility;
         rseInputJump.action -= OnInputJump;
+        rseInputSprint.action -= OnInputSprint;
+    }
+    
+    private void OnInputSprint(bool value)
+    {
+        _isSprinting = value;
     }
 
     protected virtual void OnInputMove(Vector2 value)
@@ -50,11 +72,20 @@ public abstract class PhysicController : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        CheckTouchGround();
         HandleMovement();
+    }
+
+    private void CheckTouchGround()
+    {
+        _ray.origin = rb.position + offsetCheckGround;
+        _isGrounded = Physics.RaycastNonAlloc(_ray, _hit, distanceCheckGround, groundLayer) > 0;
     }
 
     void HandleMovement()
     {
+        if (!_isGrounded) HandleFallingGravity();
+        
         // Rotate movement direction to match camera rotation
         var adjustedDirection = Quaternion.AngleAxis(rsoCameraTransform.Value.Rotation.eulerAngles.y, Vector3.up) * _movement;
             
@@ -70,9 +101,15 @@ public abstract class PhysicController : MonoBehaviour
         }
     }
 
+    private void HandleFallingGravity()
+    {
+        _jumpVelocity += Physics.gravity.y * gravityFallingMultiplier * Time.fixedDeltaTime;
+        rb.velocity = new Vector3(rb.velocity.x, _jumpVelocity, rb.velocity.z);
+    }
+
     void HandleHorizontalMovement(Vector3 adjustedDirection) {
         // Move the player
-        Vector3 velocity = adjustedDirection * (speed * Time.fixedDeltaTime);
+        Vector3 velocity = adjustedDirection * ((_isSprinting ? speedSprinting : speed ) * Time.fixedDeltaTime);
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
     }
 
@@ -88,10 +125,12 @@ public abstract class PhysicController : MonoBehaviour
     
     protected virtual void OnInputJump()
     {
-        if (!_canJump) return;
+        if (!_isGrounded || !_canJump) return;
+        _jumpVelocity = jumpForce;
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         _canJump = false;
         StartCoroutine(Utils.Delay(jumpCooldown, () => _canJump = true));
+
     }
     
     protected abstract void OnInputAbility();
@@ -103,5 +142,11 @@ public abstract class PhysicController : MonoBehaviour
         rb.MoveRotation(quaternion);
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    protected virtual void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(_ray.origin, _ray.origin + _ray.direction * distanceCheckGround);
     }
 }

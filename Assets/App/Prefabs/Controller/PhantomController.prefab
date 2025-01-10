@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  sprintMultiplier: 1.5
   jumpForce: 10
+  smoothTime: 0.2
   jumpCooldown: 0.5
   rotationSpeed: 10
   rb: {fileID: 4314401141684150689}
@@ -92,7 +92,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5458675368429869566}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7ac83f26fe66d26468d5b08fe2ab5a08, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
