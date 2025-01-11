@@ -3,11 +3,11 @@ using UnityEngine;
 public abstract class PhysicController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private SSO_ControllerStat ssoControllerStat;
+    [SerializeField] protected SSO_ControllerStat ssoControllerStat;
     
     [Header("References")]
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private RSO_CameraTransform rsoCameraTransform;
+    [SerializeField] protected Rigidbody rb;
+    [SerializeField] protected RSO_CameraTransform rsoCameraTransform;
 
     [Header("Input")]
     [SerializeField] private RSE_InputMove rseInputMove;
@@ -17,16 +17,16 @@ public abstract class PhysicController : MonoBehaviour
 
 
     private float _currentSpeed;
-    private bool _isGrounded;
+    protected bool _isGrounded;
     private bool _canJump = true;
-    private bool _coyoteeTimerRunning;
+    protected bool _coyoteeTimerRunning;
     private Vector3 _moveDirection = Vector3.one;
     private static readonly float ZeroF = 0f;
     
 
-    private void Start() => _currentSpeed = ssoControllerStat.speed;
+    protected virtual void Start() => _currentSpeed = ssoControllerStat.speed;
     
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         rseInputMove.action += OnInputMove;
         rseInputJump.action += OnJumpInput;
@@ -34,7 +34,7 @@ public abstract class PhysicController : MonoBehaviour
         rseInputAbility.action += OnInputAbility;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         rseInputMove.action -= OnInputMove;
         rseInputJump.action -= OnJumpInput;
@@ -42,23 +42,23 @@ public abstract class PhysicController : MonoBehaviour
         rseInputAbility.action -= OnInputAbility;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         CheckGrounded();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         Move();
         ApplyGravity();
     }
 
-    private void OnInputMove(Vector2 input)
+    protected virtual void OnInputMove(Vector2 input)
     {
         _moveDirection = new Vector3(input.x, 0, input.y).normalized;
     }
 
-    private void OnJumpInput()
+    protected virtual void OnJumpInput()
     {
         if (!_canJump) return;
         if (_isGrounded) Jump();
@@ -66,16 +66,16 @@ public abstract class PhysicController : MonoBehaviour
         
     }
     
-    private void OnInputSprint(bool isSprinting)
+    protected virtual void OnInputSprint(bool isSprinting)
     {
         _currentSpeed = isSprinting ? ssoControllerStat.speed * ssoControllerStat.sprintMultiplier : ssoControllerStat.speed;
     }    
     
-    private void CheckGrounded()
+    protected virtual void CheckGrounded()
     {
         RaycastHit hit;
         var wasGrounded = _isGrounded;
-        _isGrounded = Physics.RaycastNonAlloc(new Ray(transform.position, Vector3.down), new RaycastHit[1], ssoControllerStat.distanceCheck) > 0;
+        _isGrounded = Physics.RaycastNonAlloc(new Ray(transform.position + ssoControllerStat.positionCheckOffset, Vector3.down), new RaycastHit[1], ssoControllerStat.distanceCheck) > 0;
 
         if (!_isGrounded && wasGrounded)
         {
@@ -85,11 +85,11 @@ public abstract class PhysicController : MonoBehaviour
     }
     
 
-    private void Move()
+    protected virtual void Move()
     {
         var adjustedDirection = Quaternion.AngleAxis(rsoCameraTransform.Value.Rotation.eulerAngles.y, Vector3.up) * _moveDirection;
 
-        if (adjustedDirection.magnitude > ZeroF)
+        if (adjustedDirection.magnitude > 0.1f)
         {
             HandleRotation(adjustedDirection);
             Vector3 targetVelocity = adjustedDirection * _currentSpeed;
@@ -101,13 +101,13 @@ public abstract class PhysicController : MonoBehaviour
         }
     }
 
-    private void HandleRotation(Vector3 adjustedDirection)
+    protected virtual void HandleRotation(Vector3 adjustedDirection)
     {
         var targetRotation = Quaternion.LookRotation(adjustedDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, ssoControllerStat.smoothStopTime * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, ssoControllerStat.rotationSpeed * Time.deltaTime);
     }
 
-    private void ApplyGravity()
+    protected virtual void ApplyGravity()
     {
         if (!_isGrounded)
         {
@@ -115,7 +115,7 @@ public abstract class PhysicController : MonoBehaviour
         }
     }
     
-    private void Jump()
+    protected virtual void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, ssoControllerStat.jumpForce, rb.velocity.z);
         _canJump = false;
@@ -124,7 +124,7 @@ public abstract class PhysicController : MonoBehaviour
  
     protected abstract void OnInputAbility();
     
-    public void Teleport(Vector3 position, Quaternion rotation)
+    public virtual void Teleport(Vector3 position, Quaternion rotation)
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;

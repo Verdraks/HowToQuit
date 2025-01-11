@@ -54,6 +54,9 @@ MonoBehaviour:
   rseInputMove: {fileID: 11400000, guid: 9a0b483dc5c652542a0e0d8b346b8fd6, type: 2}
   rseInputJump: {fileID: 11400000, guid: b36dc25aab8a1264fb63e454cc403d3c, type: 2}
   rseInputSprint: {fileID: 11400000, guid: 18ad135768700244cab4c5345fc53f44, type: 2}
+  rseInputAbility: {fileID: 11400000, guid: fea1a9df3e97c6047bb71ac6db3e7bd6, type: 2}
+  maxDistanceCheckHit: 0.2
+  flySpeed: 8
 --- !u!54 &8316033174541762378
 Rigidbody:
   m_ObjectHideFlags: 0

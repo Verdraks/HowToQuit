@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "SSO_ControllerStat", menuName = "ScriptableObject/SSO_ControllerStat")]
 public class SSO_ControllerStat : ScriptableObject
@@ -13,7 +14,7 @@ public class SSO_ControllerStat : ScriptableObject
     [Space(10)]
     public float fallAcceleration = 2f;
     public float distanceCheck = 0.2f;
+    public Vector3 positionCheckOffset = new(0,0.2f,0);
     [Space(10)]
-    public float smoothStopTime = 0.2f;
-    public float rotationSpeed = 360f;
+    public float rotationSpeed = 60f;
 }
