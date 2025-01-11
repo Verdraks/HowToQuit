@@ -34,7 +34,7 @@ public static class Utils
     /// <param name="loadMode"></param>
     /// <param name="action"></param>
     /// <returns></returns>
-    public static IEnumerator LoadSceneAsync(int sceneIndex, LoadSceneMode loadMode, Action action)
+    public static IEnumerator LoadSceneAsync(string sceneIndex, LoadSceneMode loadMode, Action action)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex, loadMode);
 

@@ -15,8 +15,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Achievement/SSO_AchivementObject.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/IBreakable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/SpawnPoint.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/CustomSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/RSE_LoadScene.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/ReloadManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -85,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1736277175888</updated>
       <workItem from="1736277178889" duration="4247000" />
-      <workItem from="1736601713387" duration="10307000" />
+      <workItem from="1736601713387" duration="12378000" />
     </task>
     <servers />
   </component>
