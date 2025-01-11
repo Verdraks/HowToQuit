@@ -1,20 +1,10 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public abstract class PhysicController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float sprintMultiplier = 1.5f;
-    [SerializeField] private float jumpForce = 10f;
-    [SerializeField] private float jumpCooldown = 0.5f;
-    [SerializeField] private float coyoteeTime = 0.2f;
-    [SerializeField] private float inputBufferTime = 0.2f;
-    [SerializeField] private float fallAcceleration = 2f;
-    [SerializeField] private float smoothStopTime = 0.2f;
-    [SerializeField] private float rotationSpeed = 360f;
-
+    [SerializeField] private SSO_ControllerStat ssoControllerStat;
+    
     [Header("References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private RSO_CameraTransform rsoCameraTransform;
@@ -24,9 +14,10 @@ public abstract class PhysicController : MonoBehaviour
     [SerializeField] private RSE_InputJump rseInputJump;
     [SerializeField] private RSE_InputSprint rseInputSprint;
 
+
+    private float currentSpeed;
     private bool _isGrounded;
     private bool _canJump = true;
-    private bool _bufferTimerRunning;
     private bool _coyoteeTimerRunning;
     private Vector3 _moveDirection;
     private Vector3 _velocity;
@@ -51,7 +42,6 @@ public abstract class PhysicController : MonoBehaviour
     private void Update()
     {
         CheckGrounded();
-        HandleJumpBuffer();
     }
 
     private void FixedUpdate()
@@ -67,25 +57,27 @@ public abstract class PhysicController : MonoBehaviour
 
     private void OnJumpInput()
     {
-        _coyoteeTimerRunning = true;
-        StartCoroutine(Utils.Delay(coyoteeTime,()=> _coyoteeTimerRunning = false));
+        if (!_canJump) return;
+        if (_isGrounded) Jump();
+        else if (_coyoteeTimerRunning) Jump();
+        
     }
     
     private void OnInputSprint(bool isSprinting)
     {
-        speed *= isSprinting ? sprintMultiplier : 1f / sprintMultiplier;
+        currentSpeed = isSprinting ? ssoControllerStat.speed * ssoControllerStat.sprintMultiplier : ssoControllerStat.speed;
     }    
     
     private void CheckGrounded()
     {
         RaycastHit hit;
         var wasGrounded = _isGrounded;
-        _isGrounded = Physics.RaycastNonAlloc(new Ray(transform.position, Vector3.down), new RaycastHit[1], 0.1f) > 0;
+        _isGrounded = Physics.RaycastNonAlloc(new Ray(transform.position, Vector3.down), new RaycastHit[1], ssoControllerStat.distanceCheck) > 0;
 
         if (!_isGrounded && wasGrounded)
         {
-            _bufferTimerRunning = true;
-            StartCoroutine(Utils.Delay(inputBufferTime,()=> _bufferTimerRunning = false));
+            _coyoteeTimerRunning = true;
+            StartCoroutine(Utils.Delay(ssoControllerStat.coyoteeTime,()=> _coyoteeTimerRunning = false));
         }
     }
     
@@ -97,7 +89,7 @@ public abstract class PhysicController : MonoBehaviour
         if (adjustedDirection.magnitude > ZeroF)
         {
             HandleRotation(adjustedDirection);
-            Vector3 targetVelocity = adjustedDirection * speed;
+            Vector3 targetVelocity = adjustedDirection * currentSpeed;
             rb.velocity = new Vector3(targetVelocity.x, rb.velocity.y, targetVelocity.z);
         }
         else
@@ -109,39 +101,24 @@ public abstract class PhysicController : MonoBehaviour
     private void HandleRotation(Vector3 adjustedDirection)
     {
         var targetRotation = Quaternion.LookRotation(adjustedDirection);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, smoothStopTime * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, ssoControllerStat.smoothStopTime * Time.deltaTime);
     }
 
     private void ApplyGravity()
     {
         if (!_isGrounded)
         {
-            rb.velocity += Vector3.down * (fallAcceleration * Time.fixedDeltaTime);
+            rb.velocity += Vector3.down * (ssoControllerStat.fallAcceleration * Time.fixedDeltaTime);
         }
-    }
-
-    
-    private void HandleJumpBuffer()
-    {
-        if (!_canJump) return;
-        if (_isGrounded) Jump();
-        else if (!_isGrounded && _coyoteeTimerRunning) Jump();
-        
-        // if (Time.time - _lastJumpInputTime <= inputBufferTime &&
-        //     Time.time - _lastGroundedTime <= coyoteeTime &&
-        //     !_canJump)
-        // {
-        //     Jump();
-        // }
     }
     
     private void Jump()
     {
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        rb.velocity = new Vector3(rb.velocity.x, ssoControllerStat.jumpForce, rb.velocity.z);
         _canJump = false;
-        StartCoroutine(Utils.Delay(jumpCooldown, () => _canJump = true));
+        StartCoroutine(Utils.Delay(ssoControllerStat.jumpCooldown, () => _canJump = true));
     }
-
+ 
     protected abstract void OnInputAbility();
     
     public void Teleport(Vector3 position, Quaternion rotation)

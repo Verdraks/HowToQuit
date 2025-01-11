@@ -66,6 +66,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerPrefabs:
   - {fileID: 3968496131724466461, guid: 34b554fa91e40ec478c509f2736b7111, type: 3}
+  - {fileID: 2502566689650494403, guid: 74af7268e02461a48a8d76334c9d911b, type: 3}
+  - {fileID: 5458675368429869566, guid: 918197f5fb94f244d94057df1df04a0a, type: 3}
   rsoSpawnPosition: {fileID: 11400000, guid: 672c349695aec8b4989f34aaa4cd8f72, type: 2}
   rseInputSwapController: {fileID: 11400000, guid: 2f2b3fdf9e351ef4c8de786c68fb1eea,
     type: 2}

@@ -3,6 +3,7 @@ public class CameraController : MonoBehaviour
 {
     
     [Header("Settings")]
+    [SerializeField] private float offsetY = 0.5f;
     [SerializeField] private float rotationSpeed = 100f;
     [SerializeField] private float distanceFromTarget = 5f;
     [SerializeField] private float minYAngle = -30f;
@@ -45,7 +46,6 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Update camera position
         UpdateCameraPosition();
     }
 
@@ -72,6 +72,6 @@ public class CameraController : MonoBehaviour
 
         // Set the camera's position and rotation
         transform.position = position;
-        transform.LookAt(rsoTargetData.Value.Position);
+        transform.LookAt(rsoTargetData.Value.Position + new Vector3(0f,offsetY,0f));
     }
 }

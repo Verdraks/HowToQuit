@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 0
   m_Name: DestroyerController
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -48,21 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97949b3c2ac4ce4d90258a7161bd615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  sprintMultiplier: 1.5
-  jumpForce: 9
-  coyoteTime: 0.2
-  inputBufferTime: 0.2
-  fallAcceleration: 2
-  smoothStopTime: 0.2
-  rotationSpeed: 10
+  ssoControllerStat: {fileID: 11400000, guid: 0f3ba6f523f661e41973557d030eb117, type: 2}
   rb: {fileID: 7023068435073724191}
   rsoCameraTransform: {fileID: 11400000, guid: 6d7afe7f892398b4084a4d709ce0f2ab, type: 2}
   rseInputMove: {fileID: 11400000, guid: 9a0b483dc5c652542a0e0d8b346b8fd6, type: 2}
   rseInputJump: {fileID: 11400000, guid: b36dc25aab8a1264fb63e454cc403d3c, type: 2}
   rseInputSprint: {fileID: 11400000, guid: 18ad135768700244cab4c5345fc53f44, type: 2}
   sizeCast: {x: 1, y: 1, z: 1}
-  positionCast: {x: 0, y: 0, z: 1.1}
+  positionCast: {x: 0, y: 1, z: 1.1}
   distanceCast: 5
   layerMask:
     serializedVersion: 2
@@ -92,7 +85,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &3888960532908544675
@@ -117,7 +110,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5997469967789260103
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 5997469967789260103}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

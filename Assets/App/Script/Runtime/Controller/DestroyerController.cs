@@ -16,7 +16,7 @@ public class DestroyerController : PhysicController
 
     protected override void OnInputAbility()
     {
-        int hitCount = Physics.BoxCastNonAlloc(positionCast, sizeCast*0.5f, transform.forward, hits,Quaternion.identity,distanceCast,layerMask);
+        int hitCount = Physics.BoxCastNonAlloc(transform.position + positionCast, sizeCast*0.5f, transform.forward, hits,Quaternion.identity,distanceCast,layerMask);
         if (hitCount > 0)
         {
             for (int i = 0; i < hitCount; i++)
@@ -29,6 +29,6 @@ public class DestroyerController : PhysicController
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(positionCast,sizeCast);
+        Gizmos.DrawWireCube(transform.position+ positionCast,sizeCast);
     }
 }
