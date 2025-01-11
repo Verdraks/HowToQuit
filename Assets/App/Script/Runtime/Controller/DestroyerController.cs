@@ -10,18 +10,18 @@ public class DestroyerController : PhysicController
     
     [SerializeField] private int maxCastObject;
 
-    private RaycastHit[] hits;
+    private RaycastHit[] _hits;
 
-    private void Awake() => hits = new RaycastHit[maxCastObject];
+    private void Awake() => _hits = new RaycastHit[maxCastObject];
 
     protected override void OnInputAbility()
     {
-        int hitCount = Physics.BoxCastNonAlloc(transform.position + positionCast, sizeCast*0.5f, transform.forward, hits,Quaternion.identity,distanceCast,layerMask);
+        int hitCount = Physics.BoxCastNonAlloc(transform.position + positionCast, sizeCast, transform.forward, _hits,Quaternion.identity,distanceCast,layerMask);
         if (hitCount > 0)
         {
             for (int i = 0; i < hitCount; i++)
             {
-                Debug.Log($"Hit: {hits[i].transform.name}");
+                _hits[i].transform.GetComponent<IBreakable>()?.Break();
             }
         }
     }
@@ -29,6 +29,6 @@ public class DestroyerController : PhysicController
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position+ positionCast,sizeCast);
+        Gizmos.DrawWireCube( transform.position + transform.rotation * positionCast  ,sizeCast);
     }
 }

@@ -13,23 +13,25 @@ public abstract class PhysicController : MonoBehaviour
     [SerializeField] private RSE_InputMove rseInputMove;
     [SerializeField] private RSE_InputJump rseInputJump;
     [SerializeField] private RSE_InputSprint rseInputSprint;
+    [SerializeField] private RSE_InputAbility rseInputAbility;
 
 
-    private float currentSpeed;
+    private float _currentSpeed;
     private bool _isGrounded;
     private bool _canJump = true;
     private bool _coyoteeTimerRunning;
-    private Vector3 _moveDirection;
-    private Vector3 _velocity;
-    private Vector3 _currentSmoothVelocity;
+    private Vector3 _moveDirection = Vector3.one;
     private static readonly float ZeroF = 0f;
     
 
+    private void Start() => _currentSpeed = ssoControllerStat.speed;
+    
     private void OnEnable()
     {
         rseInputMove.action += OnInputMove;
         rseInputJump.action += OnJumpInput;
         rseInputSprint.action += OnInputSprint;
+        rseInputAbility.action += OnInputAbility;
     }
 
     private void OnDisable()
@@ -37,6 +39,7 @@ public abstract class PhysicController : MonoBehaviour
         rseInputMove.action -= OnInputMove;
         rseInputJump.action -= OnJumpInput;
         rseInputSprint.action -= OnInputSprint;
+        rseInputAbility.action -= OnInputAbility;
     }
 
     private void Update()
@@ -65,7 +68,7 @@ public abstract class PhysicController : MonoBehaviour
     
     private void OnInputSprint(bool isSprinting)
     {
-        currentSpeed = isSprinting ? ssoControllerStat.speed * ssoControllerStat.sprintMultiplier : ssoControllerStat.speed;
+        _currentSpeed = isSprinting ? ssoControllerStat.speed * ssoControllerStat.sprintMultiplier : ssoControllerStat.speed;
     }    
     
     private void CheckGrounded()
@@ -89,7 +92,7 @@ public abstract class PhysicController : MonoBehaviour
         if (adjustedDirection.magnitude > ZeroF)
         {
             HandleRotation(adjustedDirection);
-            Vector3 targetVelocity = adjustedDirection * currentSpeed;
+            Vector3 targetVelocity = adjustedDirection * _currentSpeed;
             rb.velocity = new Vector3(targetVelocity.x, rb.velocity.y, targetVelocity.z);
         }
         else

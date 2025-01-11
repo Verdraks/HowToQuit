@@ -780,6 +780,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InputController
       objectReference: {fileID: 0}
+    - target: {fileID: 967496351620363899, guid: 67697b2d48deee14ab9237a77191b881,
+        type: 3}
+      propertyPath: controllerPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6282463333142205861, guid: 67697b2d48deee14ab9237a77191b881,
         type: 3}
       propertyPath: m_LocalPosition.x

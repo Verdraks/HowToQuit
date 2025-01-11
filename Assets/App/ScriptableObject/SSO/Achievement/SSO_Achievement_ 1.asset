@@ -9,15 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df9bbc0a8404e4241a92c76fef436ab7, type: 3}
-  m_Name: SSO_ControllerStat
+  m_Script: {fileID: 11500000, guid: 7d4b59b78841a72448d25450b377c146, type: 3}
+  m_Name: SSO_Achievement_ 1
   m_EditorClassIdentifier: 
-  speed: 6
-  sprintMultiplier: 1.8
-  jumpForce: 15
-  jumpCooldown: 0.5
-  coyoteeTime: 0.18
-  fallAcceleration: 6
-  distanceCheck: 0.15
-  smoothStopTime: 0.15
-  rotationSpeed: 40
+  achievementName: 
+  achievementDescription: 
+  achievementIcon: {fileID: 0}
+  valueTarget: 0
+  rso: {fileID: 0}
