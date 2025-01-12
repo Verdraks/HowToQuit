@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   sprintMultiplier: 1.8
-  jumpForce: 15
-  jumpCooldown: 0.5
-  coyoteeTime: 0.18
-  fallAcceleration: 6
-  distanceCheck: 0.2
+  jumpForce: 8
+  jumpCooldown: 0.6
+  coyoteeTime: 0.15
+  fallAcceleration: 8
+  distanceCheck: 0.3
   positionCheckOffset: {x: 0, y: 0.2, z: 0}
   rotationSpeed: 365

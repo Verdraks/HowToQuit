@@ -14,6 +14,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Editor/ApplyMaterialEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Achievement/SSO_AchivementObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/CustomSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/RSE_LoadScene.cs" root0="FORCE_HIGHLIGHTING" />
@@ -87,6 +88,11 @@
       <updated>1736277175888</updated>
       <workItem from="1736277178889" duration="4247000" />
       <workItem from="1736601713387" duration="12378000" />
+      <workItem from="1736694325253" duration="453000" />
+      <workItem from="1736694790118" duration="618000" />
+      <workItem from="1736697284951" duration="1730000" />
+      <workItem from="1736701399295" duration="9438000" />
+      <workItem from="1736714499976" duration="833000" />
     </task>
     <servers />
   </component>
