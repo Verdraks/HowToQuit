@@ -194,6 +194,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Menu",
+            "id": "1aed2dc9-fe53-408d-b277-457fd954bc28",
+            "actions": [
+                {
+                    "name": "Achievement",
+                    "type": "Button",
+                    "id": "4434b0b1-bf25-4c37-9740-926d6dbd8f3c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3909cf1f-9460-4f8b-aeea-5778f0aeb7cf",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Achievement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

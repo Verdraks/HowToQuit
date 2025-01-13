@@ -216,6 +216,34 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""1aed2dc9-fe53-408d-b277-457fd954bc28"",
+            ""actions"": [
+                {
+                    ""name"": ""Achievement"",
+                    ""type"": ""Button"",
+                    ""id"": ""4434b0b1-bf25-4c37-9740-926d6dbd8f3c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3909cf1f-9460-4f8b-aeea-5778f0aeb7cf"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Achievement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -228,6 +256,9 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Achievement = m_Menu.FindAction("Achievement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -371,6 +402,52 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
+    private readonly InputAction m_Menu_Achievement;
+    public struct MenuActions
+    {
+        private @InputActionController m_Wrapper;
+        public MenuActions(@InputActionController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Achievement => m_Wrapper.m_Menu_Achievement;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void AddCallbacks(IMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MenuActionsCallbackInterfaces.Add(instance);
+            @Achievement.started += instance.OnAchievement;
+            @Achievement.performed += instance.OnAchievement;
+            @Achievement.canceled += instance.OnAchievement;
+        }
+
+        private void UnregisterCallbacks(IMenuActions instance)
+        {
+            @Achievement.started -= instance.OnAchievement;
+            @Achievement.performed -= instance.OnAchievement;
+            @Achievement.canceled -= instance.OnAchievement;
+        }
+
+        public void RemoveCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -379,5 +456,9 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnAchievement(InputAction.CallbackContext context);
     }
 }

@@ -50,9 +50,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16748f85b88d4224db0dba52c5344477, type: 2}
   - {fileID: 11400000, guid: 23cafd1208fdb0845a78ec14b5a20140, type: 2}
   rsoContentSaved: {fileID: 11400000, guid: e7ba5a2bfc8624b4baa4d8d1733f4823, type: 2}
-  rseTriggerAchievement: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493,
+  rsoAchievementRuntimeData: {fileID: 11400000, guid: ff67fba6a38362441833055dca03deff,
     type: 2}
-  rsoAchievementComplete: {fileID: 11400000, guid: ff67fba6a38362441833055dca03deff,
+  rseTriggerAchievement: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493,
     type: 2}
 --- !u!114 &1841895128010350754
 MonoBehaviour:
