@@ -56,6 +56,7 @@ public class AchievementManager : MonoBehaviour
         {
             rseTriggerAchievement.Call();
             rsoAchievementRuntimeData.Value.lastAchievementCompletedID = "";
+            rsoContentSaved.Value.lastAchievementCompletedId = "";
         }
     }
 

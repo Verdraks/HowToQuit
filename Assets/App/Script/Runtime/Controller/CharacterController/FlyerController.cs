@@ -38,7 +38,7 @@ public class FlyerController : PhysicController
 
     protected override void OnInputAbility()
     {
-        if (!_isFlying && !_isGrounded && _coyoteeTimerRunning) return;
+        if (!_isFlying && !_isGrounded && !_coyoteeTimerRunning) return;
         
         if (!_isFlying)
         {
@@ -47,6 +47,7 @@ public class FlyerController : PhysicController
         }
         else
         {
+            StopCoroutine(ActivateFlyingMode());
             DisableFlyingMode();
         }
     }
@@ -113,9 +114,5 @@ public class FlyerController : PhysicController
 
     private void CheckCollision()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxDistanceCheckHit))
-        {
-            Debug.LogWarning("Collision detected, calling Death()");
-        }
     }
 }

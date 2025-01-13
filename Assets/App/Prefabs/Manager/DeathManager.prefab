@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoadOnDeath: ReloadScene
-  deathDelay: 0.4
+  deathDelay: 100
   rseDeath: {fileID: 11400000, guid: a4f25d02f1bbae642ab4dc5a25c04596, type: 2}
   rseSaveData: {fileID: 11400000, guid: 705ceebef148be14f87483ad4ff06f85, type: 2}
   rseLoadScene: {fileID: 11400000, guid: 85f00807117a3a640b5c8c3d8dfbc867, type: 2}

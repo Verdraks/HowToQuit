@@ -39,6 +39,7 @@ public class AchievementListManager : MonoBehaviour
 
     private void UpdateHUD()
     {
+        if (achievementUiObjects == null) return;
         for (int i = 0; i < achievementUiObjects.Length; i++)
         {
             if (achievementUiObjects[i].Item2 == rsoAchievementRuntimeData.Value.lastAchievementCompletedID)
