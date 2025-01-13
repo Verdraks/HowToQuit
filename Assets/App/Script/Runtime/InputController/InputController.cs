@@ -1,4 +1,5 @@
 using System;
+using BT.ScriptablesObject;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -13,6 +14,8 @@ public class InputController : MonoBehaviour
     [SerializeField] private RSE_InputJump rseInputJump;
     [SerializeField] private RSE_InputSprint rseInputSprint;
     [SerializeField] private RSE_InputAchievement rseInputAchievement;
+    [Space(10)] 
+    [SerializeField] private RSE_AltF4 rseAltF4;
 
     private InputActionController _inputActionController;
 
@@ -52,6 +55,18 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         OnInputMovePerformed();
+        CheckSecretAchievement();
+    }
+
+    private void CheckSecretAchievement()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.F4))
+            {
+                rseAltF4.Call();
+            }
+        }
     }
 
     private void OnInputSprintCall(InputAction.CallbackContext context)

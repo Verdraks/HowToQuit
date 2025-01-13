@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SSO_ControllerStat
   m_EditorClassIdentifier: 
   speed: 6
-  sprintMultiplier: 1.8
+  sprintMultiplier: 2
   jumpForce: 8
   jumpCooldown: 0.6
   coyoteeTime: 0.15

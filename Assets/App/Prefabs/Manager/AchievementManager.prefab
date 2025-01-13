@@ -46,12 +46,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   achievements:
+  - {fileID: 11400000, guid: a8b2f556b9dfa1f48b64e4ed64a0cbc3, type: 2}
+  - {fileID: 11400000, guid: 22abc0f853cbe0c48a0600f51ab231d0, type: 2}
+  - {fileID: 11400000, guid: 58b7427c7f19b2246bffcf233adaf181, type: 2}
+  - {fileID: 11400000, guid: c69acd814db344d43bffa46c1e3dfe8c, type: 2}
+  - {fileID: 11400000, guid: 9c884fd019b01a54ab015af83502a362, type: 2}
+  - {fileID: 11400000, guid: aab231b790ab2c243b9329453434aa7a, type: 2}
+  - {fileID: 11400000, guid: 7245762b24ac17942b1e113895721b4c, type: 2}
   - {fileID: 11400000, guid: 09fab2a1746194b4a9e02ce7a14506ac, type: 2}
-  - {fileID: 11400000, guid: 16748f85b88d4224db0dba52c5344477, type: 2}
+  - {fileID: 11400000, guid: 6426e4cbb2f3fce4ca73542b8ac8c8e1, type: 2}
   - {fileID: 11400000, guid: 23cafd1208fdb0845a78ec14b5a20140, type: 2}
+  - {fileID: 11400000, guid: 16748f85b88d4224db0dba52c5344477, type: 2}
+  - {fileID: 11400000, guid: 5df01ab7443c999409c82a1790d3dacc, type: 2}
   rsoContentSaved: {fileID: 11400000, guid: e7ba5a2bfc8624b4baa4d8d1733f4823, type: 2}
   rsoAchievementRuntimeData: {fileID: 11400000, guid: ff67fba6a38362441833055dca03deff,
     type: 2}
+  rseDeath: {fileID: 11400000, guid: a4f25d02f1bbae642ab4dc5a25c04596, type: 2}
   rseTriggerAchievement: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493,
     type: 2}
 --- !u!114 &1841895128010350754

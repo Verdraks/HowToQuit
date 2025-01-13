@@ -15,6 +15,8 @@ public class AchievementManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private RSO_ContentSaved rsoContentSaved;
     [SerializeField] private RSO_AchievementRuntimeData rsoAchievementRuntimeData;
+    [Header("Input")]
+    [SerializeField] private RSE_Death rseDeath;
     [Header("Output")]
     [SerializeField] private RSE_TriggerAchievement rseTriggerAchievement;
     
@@ -38,7 +40,7 @@ public class AchievementManager : MonoBehaviour
             bool find = false;
             foreach (var id in rsoContentSaved.Value.achievementsIdCompleted)
             {
-                if (id == achievements[index].AchievementId)
+                if (id == achievements[index].achievementId)
                 {
                     find = true;
                     break;
@@ -50,7 +52,7 @@ public class AchievementManager : MonoBehaviour
 
         await Task.Delay(100);
         
-        if (rsoAchievementRuntimeData.Value.lastAchievementCompletedID != "")
+        if (!string.IsNullOrEmpty(rsoAchievementRuntimeData.Value.lastAchievementCompletedID))
         {
             rseTriggerAchievement.Call();
             rsoAchievementRuntimeData.Value.lastAchievementCompletedID = "";
@@ -66,18 +68,23 @@ public class AchievementManager : MonoBehaviour
     
     private void OnAchievementCompleted(SSO_Achievement achievement)
     {
-        rsoContentSaved.Value.achievementsIdCompleted.Add(achievement.AchievementId);
+        rsoContentSaved.Value.achievementsIdCompleted.Add(achievement.achievementId);
         
-        rsoAchievementRuntimeData.Value.lastAchievementCompletedID = achievement.AchievementId;
+        rsoAchievementRuntimeData.Value.lastAchievementCompletedID = achievement.achievementId;
         
         if (!achievement.achievementOnReaload) rseTriggerAchievement.Call();
         achievement.UnbindEventCheck();
         achievement.OnAchievementComplete -= OnAchievementCompleted;
     }
 
-    private void OnDestroy()
+    private void SaveLastAchievementCompleted()
     {
         rsoContentSaved.Value.lastAchievementCompletedId = rsoAchievementRuntimeData.Value.lastAchievementCompletedID;
         rsoAchievementRuntimeData.Value = null;
     }
+
+    private void OnEnable() => rseDeath.action += SaveLastAchievementCompleted;
+    private void OnDisable() => rseDeath.action -= SaveLastAchievementCompleted;
+
+    private void OnApplicationQuit() => SaveLastAchievementCompleted();
 }

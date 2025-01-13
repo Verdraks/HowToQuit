@@ -53,7 +53,7 @@ public class SwapperController : MonoBehaviour
     private void OnInputSwapController(int value)
     {
         var oldValue = _indexCurrentController;
-        _indexCurrentController = Mathf.Clamp(_indexCurrentController + value, 0, _controllersInst.Length - 1);
+        _indexCurrentController = (_indexCurrentController+1) % _controllersInst.Length;
         if (oldValue != _indexCurrentController) SwapController(oldValue);
     }
 

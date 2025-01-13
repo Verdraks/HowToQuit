@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbcb0bb689f80240a6de3e712eaa144, type: 3}
-  m_Name: SSO_Achievement_
+  m_Name: SSO_Achievement_Quit
   m_EditorClassIdentifier: 
-  achievementName: TeleportBack
-  achievementDescription: You fall in the void
-  achievementIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  achievementOnReaload: 0
-  rse: {fileID: 11400000, guid: 8cf88b3dca646ff4691a57018e0bdcc5, type: 2}
+  achievementName: Quit
+  achievementDescription: 
+  achievementIcon: {fileID: 0}
+  achievementId: quit
+  achievementOnReaload: 1
+  rse: {fileID: 11400000, guid: 56ec890ac581e3e4a80b9defb7dfc54d, type: 2}

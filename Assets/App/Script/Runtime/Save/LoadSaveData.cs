@@ -7,6 +7,9 @@ namespace BT.Save
 {
     public class LoadSaveData : MonoBehaviour
     {
+        [Header("Settings")]
+        [SerializeField] private bool loadOnStart = true;
+        
         [Header("References")]
         [SerializeField] private RSE_LoadData rseCommandLoad;
         [SerializeField] private RSE_SaveData rseCommandSave;
@@ -31,8 +34,8 @@ namespace BT.Save
         private void Awake()
         {
             filepath = Application.persistentDataPath + $"/Save_{Application.productName}.json";
-
-            if (FileAlreadyExist()) LoadFromJson();
+            
+            if (FileAlreadyExist() && loadOnStart) LoadFromJson();
             else
             {
                 rsoContentSaved.Value = new ContentSaved();

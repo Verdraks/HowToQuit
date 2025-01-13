@@ -54,6 +54,7 @@ MonoBehaviour:
   rseInputSprint: {fileID: 11400000, guid: 18ad135768700244cab4c5345fc53f44, type: 2}
   rseInputAchievement: {fileID: 11400000, guid: 403ece7eed17e96438ce3c5249cda7e2,
     type: 2}
+  rseAltF4: {fileID: 11400000, guid: 01d73f795fa230447aee4099229a0d40, type: 2}
 --- !u!114 &967496351620363899
 MonoBehaviour:
   m_ObjectHideFlags: 0

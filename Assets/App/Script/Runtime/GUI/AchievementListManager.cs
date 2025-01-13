@@ -31,7 +31,7 @@ public class AchievementListManager : MonoBehaviour
         for (int i = 0; i < rsoAchievementRuntimeData.Value.achievements.Length; i++)
         {
             AchievementUiIcon achievementUiIconObject = Instantiate(achievementUiPrefab, achievementsContainer).GetComponent<AchievementUiIcon>();
-            achievementUiObjects[i] = new Tuple<AchievementUiIcon, string>(achievementUiIconObject, rsoAchievementRuntimeData.Value.achievements[i].AchievementId);
+            achievementUiObjects[i] = new Tuple<AchievementUiIcon, string>(achievementUiIconObject, rsoAchievementRuntimeData.Value.achievements[i].achievementId);
             achievementUiObjects[i].Item1.UpdateElement(rsoAchievementRuntimeData.Value.achievementsCompleted[i],rsoAchievementRuntimeData.Value.achievements[i]);
         }
         

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f703302a64321984e9764d7777070559, type: 3}
+  m_Name: SSO_Achievement_Death_Trap
+  m_EditorClassIdentifier: 
+  achievementName: Trap
+  achievementDescription: 
+  achievementIcon: {fileID: 0}
+  achievementId: trapdeath
+  achievementOnReaload: 1
+  valueTarget: Trap
+  rse: {fileID: 11400000, guid: 6c7ffc8c7356fa94ebd8462b6ff589b5, type: 2}

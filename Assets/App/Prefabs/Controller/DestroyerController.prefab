@@ -86,6 +86,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  abilityCooldown: 0.8
   sizeCast: {x: 1, y: 1, z: 1}
   positionCast: {x: 0, y: 1, z: 1.1}
   distanceCast: 5
@@ -93,6 +94,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   maxCastObject: 5
+  abilityUsed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &7023068435073724191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -647,6 +651,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: spike-block
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010889688659210294, guid: 3221333d246669943a00835096e01920,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -6,7 +6,7 @@ namespace BT.Save
     public class ContentSaved
     {
         public List<string> achievementsIdCompleted = new();
-        public string lastAchievementCompletedId;
+        public string lastAchievementCompletedId = "";
     }
 }
 

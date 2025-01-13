@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 743330036202089109}
   - component: {fileID: 7107563128138640390}
   m_Layer: 0
-  m_Name: TriggerBox
+  m_Name: TriggerBox_Teleport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,4 +67,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerTag: Player
-  rse: {fileID: 11400000, guid: 8cf88b3dca646ff4691a57018e0bdcc5, type: 2}
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8cf88b3dca646ff4691a57018e0bdcc5, type: 2}
+        m_TargetAssemblyTypeName: BT.ScriptablesObject.RuntimeScriptableEvent, Assembly-CSharp
+        m_MethodName: Call
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

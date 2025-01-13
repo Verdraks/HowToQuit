@@ -89,6 +89,10 @@ MonoBehaviour:
   excludeLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  collider: {fileID: 2537106892673647937}
+  deathTag: Suffocate
+  rseDeathCondition: {fileID: 11400000, guid: 6c7ffc8c7356fa94ebd8462b6ff589b5, type: 2}
+  rseDeath: {fileID: 11400000, guid: a4f25d02f1bbae642ab4dc5a25c04596, type: 2}
 --- !u!54 &4314401141684150689
 Rigidbody:
   m_ObjectHideFlags: 0

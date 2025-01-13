@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbcb0bb689f80240a6de3e712eaa144, type: 3}
-  m_Name: SSO_AchievementUseAbility
+  m_Name: SSO_Achievement_AltF4
   m_EditorClassIdentifier: 
-  achievementName: Ability
-  achievementDescription: Wow you have great power
-  achievementIcon: {fileID: 21300000, guid: a817d865058d9f349b957407c54c8f51, type: 3}
-  achievementOnReaload: 0
-  rse: {fileID: 11400000, guid: fea1a9df3e97c6047bb71ac6db3e7bd6, type: 2}
+  achievementName: AltF4
+  achievementDescription: That's a nice secret
+  achievementIcon: {fileID: 21300000, guid: cdea745d57535754f9ee6369d34549a3, type: 3}
+  achievementId: altf4
+  achievementOnReaload: 1
+  rse: {fileID: 11400000, guid: 01d73f795fa230447aee4099229a0d40, type: 2}
