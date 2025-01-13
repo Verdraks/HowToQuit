@@ -8,8 +8,9 @@ public abstract class SSO_Achievement : ScriptableObject
     [Header("Settings")]
     public string achievementName;
     public string achievementDescription;
-    public Texture2D achievementIcon;
+    public Sprite achievementIcon;
     public string AchievementId { get; private set; }
+    public bool achievementOnReaload;
 
     public Action<SSO_Achievement> OnAchievementComplete;
     

@@ -119,7 +119,7 @@ public partial class @InputActionController: IInputActionCollection2, IDisposabl
                 {
                     ""name"": """",
                     ""id"": ""36bf1420-14d4-493c-8d9c-647f0c8cac70"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

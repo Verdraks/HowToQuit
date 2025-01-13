@@ -13,12 +13,18 @@ public class AchievementManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private RSO_ContentSaved rsoContentSaved;
     [Header("Output")]
-    [SerializeField] private RSE_TriggerAchievement rseTriggerAnimation;
-    
-    private void Awake()
+    [SerializeField] private RSE_TriggerAchievement rseTriggerAchievement;
+    [SerializeField] private RSO_AchievementComplete rsoAchievementComplete;
+
+    private void Start()
     {
         for (var index = 0; index < achievements.Length; index++)
         {
+            if (rsoContentSaved.Value.achievementsIdCompleted.Count == 0)
+            {
+                ConnectAchievementNotifiers(index);
+                continue;
+            }
             foreach (var id in rsoContentSaved.Value.achievementsIdCompleted)
             {
                 if (id != achievements[index].AchievementId)
@@ -27,7 +33,14 @@ public class AchievementManager : MonoBehaviour
                 }
             }
         }
+        
+        if (rsoAchievementComplete.Value != null)
+        {
+            rseTriggerAchievement.Call();
+            rsoAchievementComplete.Value = null;
+        }
     }
+
 
     private void ConnectAchievementNotifiers(int i)
     {
@@ -38,7 +51,14 @@ public class AchievementManager : MonoBehaviour
     private void OnAchievementCompleted(SSO_Achievement achievement)
     {
         rsoContentSaved.Value.achievementsIdCompleted.Add(achievement.AchievementId);
+        rsoAchievementComplete.Value = achievement;
+        if (!achievement.achievementOnReaload) rseTriggerAchievement.Call();
         achievement.UnbindEventCheck();
         achievement.OnAchievementComplete -= OnAchievementCompleted;
+    }
+
+    private void OnDestroy()
+    {
+        if (rsoAchievementComplete.Value && !rsoAchievementComplete.Value.achievementOnReaload) rsoAchievementComplete.Value = null;
     }
 }

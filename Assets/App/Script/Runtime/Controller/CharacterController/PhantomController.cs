@@ -12,8 +12,8 @@ public class PhantomController : PhysicController
     
     protected override void OnInputAbility()
     {
-        rb.excludeLayers = _abilityEnable ? excludeLayerMask: _originalExcludeLayerMask;
         _abilityEnable = !_abilityEnable;
+        rb.excludeLayers = _abilityEnable ? excludeLayerMask: _originalExcludeLayerMask;
         if(!_abilityEnable) CheckConditionControllerEndAbility();
     }
 

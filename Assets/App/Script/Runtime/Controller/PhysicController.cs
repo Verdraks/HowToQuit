@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class PhysicController : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public abstract class PhysicController : MonoBehaviour
     [SerializeField] private RSE_InputSprint rseInputSprint;
     [SerializeField] private RSE_InputAbility rseInputAbility;
 
-
+    [Header("Output")]
+    [SerializeField] protected UnityEvent playerOnGround;
+    [SerializeField] protected UnityEvent playerOnAir;
+    
     private float _currentSpeed;
     protected bool _isGrounded;
     private bool _canJump = true;
@@ -63,7 +67,6 @@ public abstract class PhysicController : MonoBehaviour
         if (!_canJump) return;
         if (_isGrounded) Jump();
         else if (_coyoteeTimerRunning) Jump();
-        
     }
     
     protected virtual void OnInputSprint(bool isSprinting)
@@ -82,6 +85,8 @@ public abstract class PhysicController : MonoBehaviour
             _coyoteeTimerRunning = true;
             StartCoroutine(Utils.Delay(ssoControllerStat.coyoteeTime,()=> _coyoteeTimerRunning = false));
         }
+        if (!wasGrounded && _isGrounded) playerOnGround?.Invoke();
+        else if(!_isGrounded && wasGrounded) playerOnAir?.Invoke();
     }
     
 

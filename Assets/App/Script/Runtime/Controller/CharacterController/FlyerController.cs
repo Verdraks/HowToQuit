@@ -1,12 +1,18 @@
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
+
 public class FlyerController : PhysicController
 {
     [Header("Settings")] 
     [SerializeField] private float abilityDuration = 5f;
     [SerializeField] private float maxDistanceCheckHit;
     [SerializeField] private float flySpeed;
+    
+    [Header("Ouput")]
+    [SerializeField] UnityEvent onAbilityFlyStateChange;
     
     private bool _isFlying;
     
@@ -30,11 +36,11 @@ public class FlyerController : PhysicController
 
     protected override void OnInputAbility()
     {
-        print($"{!_isFlying}:{!_isGrounded}:{_coyoteeTimerRunning} ");
         if (!_isFlying && !_isGrounded && _coyoteeTimerRunning) return;
-
+        
         if (!_isFlying)
         {
+            playerOnAir.Invoke();
             StartCoroutine(ActivateFlyingMode());
         }
         else
@@ -60,6 +66,7 @@ public class FlyerController : PhysicController
         _isFlying = true;
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
+        onAbilityFlyStateChange.Invoke();
     }
 
     private void DisableFlyingMode()
@@ -67,6 +74,7 @@ public class FlyerController : PhysicController
         _isFlying = false;
         rb.velocity = Vector3.zero;
         rb.useGravity = true;
+        onAbilityFlyStateChange.Invoke();
     }
 
     protected override void Update()

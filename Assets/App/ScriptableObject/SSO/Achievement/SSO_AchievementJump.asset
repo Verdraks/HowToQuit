@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbcb0bb689f80240a6de3e712eaa144, type: 3}
-  m_Name: SSO_Achievement_ 2
+  m_Name: SSO_AchievementJump
   m_EditorClassIdentifier: 
-  achievementName: 
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
-  rse: {fileID: 0}
+  achievementName: Jump
+  achievementDescription: Great you know how to jump!
+  achievementIcon: {fileID: 21300000, guid: cdea745d57535754f9ee6369d34549a3, type: 3}
+  achievementOnReaload: 0
+  rse: {fileID: 11400000, guid: b36dc25aab8a1264fb63e454cc403d3c, type: 2}

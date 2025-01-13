@@ -20,7 +20,7 @@ public class DeathManager : MonoBehaviour
     private void OnDeath()
     {
         rseTriggerAnimation.Call("FadeIn");
-        Utils.Delay(deathDelay,()=>rseLoadScene.Call(sceneToLoadOnDeath));
+        StartCoroutine(Utils.Delay(deathDelay,()=>rseLoadScene.Call(sceneToLoadOnDeath)));
     }
     
 }

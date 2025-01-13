@@ -19,6 +19,8 @@ public class InputController : MonoBehaviour
     private void OnEnable()
     {
         _inputActionController.Enable();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         _inputActionController.Player.Ability.performed += OnInputAbilityPerformed;
         _inputActionController.Player.SwapController.performed += OnInputSwapControllerPerformed;
         _inputActionController.Player.Jump.performed += OnInputJumpPerformed;
@@ -37,7 +39,8 @@ public class InputController : MonoBehaviour
         
         _inputActionController.Player.Sprint.started -= OnInputSprintCall;
         _inputActionController.Player.Sprint.canceled -= OnInputSprintCall;
-        
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         _inputActionController.Disable();
     }
 

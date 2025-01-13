@@ -46,5 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievements: []
   rsoContentSaved: {fileID: 11400000, guid: e7ba5a2bfc8624b4baa4d8d1733f4823, type: 2}
-  rseTriggerAnimation: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493,
+  rseTriggerAchievement: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493,
+    type: 2}
+  rsoAchievementComplete: {fileID: 11400000, guid: ff67fba6a38362441833055dca03deff,
     type: 2}
