@@ -11,6 +11,7 @@ public class SwapperController : MonoBehaviour
     [SerializeField] private RSO_SpawnPosition rsoSpawnPosition;
     
     [Header("Input")]
+    [SerializeField] private RSE_TeleportBack rseTeleportBack;
     [SerializeField] private RSE_InputSwapController rseInputSwapController;
     
     private int _indexCurrentController;
@@ -18,9 +19,18 @@ public class SwapperController : MonoBehaviour
 
     private void Awake() => InitControllers();
 
-    private void OnEnable() => rseInputSwapController.action += OnInputSwapController;
-    private void OnDisable() => rseInputSwapController.action -= OnInputSwapController;
-    
+    private void OnEnable()
+    {
+        rseInputSwapController.action += OnInputSwapController;
+        rseTeleportBack.action += TeleportToLastPoint;
+    }
+
+    private void OnDisable()
+    {
+        rseInputSwapController.action -= OnInputSwapController;
+        rseTeleportBack.action -= TeleportToLastPoint;
+    }
+
     private void Start()
     {
         _indexCurrentController = _controllersInst.Length / 2;
@@ -54,6 +64,11 @@ public class SwapperController : MonoBehaviour
         oldController.gameObject.SetActive(false);
         newController.Teleport(oldController.transform.position, oldController.transform.rotation);
         newController.gameObject.SetActive(true);
+    }
+
+    private void TeleportToLastPoint()
+    {
+        _controllersInst[_indexCurrentController].Teleport(rsoSpawnPosition.Value, Quaternion.identity);
     }
     
 }

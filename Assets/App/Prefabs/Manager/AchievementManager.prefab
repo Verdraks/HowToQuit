@@ -48,6 +48,7 @@ MonoBehaviour:
   achievements:
   - {fileID: 11400000, guid: 09fab2a1746194b4a9e02ce7a14506ac, type: 2}
   - {fileID: 11400000, guid: 16748f85b88d4224db0dba52c5344477, type: 2}
+  - {fileID: 11400000, guid: 23cafd1208fdb0845a78ec14b5a20140, type: 2}
   rsoContentSaved: {fileID: 11400000, guid: e7ba5a2bfc8624b4baa4d8d1733f4823, type: 2}
   rseTriggerAchievement: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493,
     type: 2}
@@ -66,6 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 0059744ef8ca9cd44b1b99714507d617, type: 3}
-  volume: 1
+  volume: 0.6
   rseInput: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493, type: 2}
   rsePlayClip: {fileID: 11400000, guid: 5fa1e855424dd924da0f0597457cb8ed, type: 2}

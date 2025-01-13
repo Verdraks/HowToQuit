@@ -52,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 999, y: 1, z: 999}
+  m_Size: {x: 200, y: 1, z: 200}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7107563128138640390
 MonoBehaviour:
@@ -67,4 +67,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerTag: Player
-  rse: {fileID: 11400000, guid: a4f25d02f1bbae642ab4dc5a25c04596, type: 2}
+  rse: {fileID: 11400000, guid: 8cf88b3dca646ff4691a57018e0bdcc5, type: 2}

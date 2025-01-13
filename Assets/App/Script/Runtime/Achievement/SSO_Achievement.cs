@@ -9,7 +9,8 @@ public abstract class SSO_Achievement : ScriptableObject
     public string achievementName;
     public string achievementDescription;
     public Sprite achievementIcon;
-    public string AchievementId { get; private set; }
+    public string AchievementId { get => achievementId; private set => achievementId = value; }
+    private string achievementId;
     public bool achievementOnReaload;
 
     public Action<SSO_Achievement> OnAchievementComplete;

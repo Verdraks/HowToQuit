@@ -28,12 +28,16 @@ namespace BT.Save
             rseCommandSave.action -= SaveToJson;
         }
 
-        private void Start()
+        private void Awake()
         {
             filepath = Application.persistentDataPath + $"/Save_{Application.productName}.json";
 
             if (FileAlreadyExist()) LoadFromJson();
-            else SaveToJson();
+            else
+            {
+                rsoContentSaved.Value = new ContentSaved();
+                SaveToJson();
+            }
         }
 
         private void SaveToJson()
@@ -58,6 +62,10 @@ namespace BT.Save
         {
             return File.Exists(filepath);
         }
-        
+
+        private void OnApplicationQuit()
+        {
+            SaveToJson();
+        }
     }   
 }
