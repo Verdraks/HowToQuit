@@ -1049,7 +1049,7 @@ GameObject:
   - component: {fileID: 991013539}
   - component: {fileID: 991013538}
   - component: {fileID: 991013537}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1426,7 @@ GameObject:
   - component: {fileID: 1350785793}
   - component: {fileID: 1350785792}
   - component: {fileID: 1350785791}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Generator (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
