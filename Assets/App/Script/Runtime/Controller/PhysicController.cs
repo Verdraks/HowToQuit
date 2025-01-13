@@ -36,10 +36,12 @@ public abstract class PhysicController : MonoBehaviour
         rseInputJump.action += OnJumpInput;
         rseInputSprint.action += OnInputSprint;
         rseInputAbility.action += OnInputAbility;
+        _canJump = true;
     }
 
     protected virtual void OnDisable()
     {
+        StopAllCoroutines();
         rseInputMove.action -= OnInputMove;
         rseInputJump.action -= OnJumpInput;
         rseInputSprint.action -= OnInputSprint;

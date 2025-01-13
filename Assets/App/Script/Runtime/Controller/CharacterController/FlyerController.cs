@@ -33,6 +33,7 @@ public class FlyerController : PhysicController
     {
         base.OnDisable();
         StopCoroutine(ActivateFlyingMode());
+        DisableFlyingMode();
     }
 
     protected override void OnInputAbility()

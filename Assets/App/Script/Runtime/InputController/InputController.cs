@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class InputController : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class InputController : MonoBehaviour
     [SerializeField] private RSE_InputSwapController rseInputSwapController;
     [SerializeField] private RSE_InputJump rseInputJump;
     [SerializeField] private RSE_InputSprint rseInputSprint;
+    [SerializeField] private RSE_InputAchievement rseInputAchievement;
 
     private InputActionController _inputActionController;
 
     private void Awake() => _inputActionController = new InputActionController();
+
+    private bool _controllerInputEnabled = true;
     
     private void OnEnable()
     {
@@ -25,6 +29,7 @@ public class InputController : MonoBehaviour
         _inputActionController.Player.SwapController.performed += OnInputSwapControllerPerformed;
         _inputActionController.Player.Jump.performed += OnInputJumpPerformed;
         _inputActionController.Player.Look.performed += OnInputLookPerformed;
+        _inputActionController.Menu.Achievement.performed += OnInputAchievementPerformed;
         
         _inputActionController.Player.Sprint.started += OnInputSprintCall;
         _inputActionController.Player.Sprint.canceled += OnInputSprintCall;
@@ -75,6 +80,16 @@ public class InputController : MonoBehaviour
     {
         var value = _inputActionController.Player.Move.ReadValue<Vector2>();
         rseInputMove.Call(value);
+    }
+
+    private void OnInputAchievementPerformed(InputAction.CallbackContext context)
+    {
+        if (_controllerInputEnabled) _inputActionController.Player.Disable();
+        else _inputActionController.Player.Enable();
+        _controllerInputEnabled  = !_controllerInputEnabled;
+        Cursor.visible = !_controllerInputEnabled;
+        Cursor.lockState = _controllerInputEnabled? CursorLockMode.Locked : CursorLockMode.Confined;
+        rseInputAchievement.Call();
     }
 
     private void OnInputSwapControllerPerformed(InputAction.CallbackContext context)

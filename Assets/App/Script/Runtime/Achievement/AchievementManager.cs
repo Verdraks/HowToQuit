@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using BT.ScriptablesObject;
 using TMPro;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.SocialPlatforms.Impl;
+using Task = System.Threading.Tasks.Task;
 
 public class AchievementManager : MonoBehaviour
 {
@@ -12,31 +14,46 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] private SSO_Achievement[] achievements;
     [Header("References")]
     [SerializeField] private RSO_ContentSaved rsoContentSaved;
+    [SerializeField] private RSO_AchievementRuntimeData rsoAchievementRuntimeData;
     [Header("Output")]
     [SerializeField] private RSE_TriggerAchievement rseTriggerAchievement;
-    [SerializeField] private RSO_AchievementComplete rsoAchievementComplete;
-
-    private void Start()
+    
+    private async void Start()
     {
+        rsoAchievementRuntimeData.Value = new AchievementRuntimeData
+        {
+            achievements = achievements,
+            achievementsCompleted = new bool[achievements.Length],
+            lastAchievementCompletedID = rsoContentSaved.Value.lastAchievementCompletedId
+        };
+        
         for (var index = 0; index < achievements.Length; index++)
         {
             if (rsoContentSaved.Value.achievementsIdCompleted.Count == 0)
             {
                 ConnectAchievementNotifiers(index);
+                rsoAchievementRuntimeData.Value.achievementsCompleted[index] = false;
                 continue;
             }
             bool find = false;
             foreach (var id in rsoContentSaved.Value.achievementsIdCompleted)
             {
-                if (id == achievements[index].AchievementId){ find = true;}
-                if (!find) ConnectAchievementNotifiers(index);
+                if (id == achievements[index].AchievementId)
+                {
+                    find = true;
+                    break;
+                }
             }
+            if (!find) ConnectAchievementNotifiers(index);
+            rsoAchievementRuntimeData.Value.achievementsCompleted[index] = find;
         }
+
+        await Task.Delay(100);
         
-        if (rsoAchievementComplete.Value != null)
+        if (rsoAchievementRuntimeData.Value.lastAchievementCompletedID != "")
         {
             rseTriggerAchievement.Call();
-            rsoAchievementComplete.Value = null;
+            rsoAchievementRuntimeData.Value.lastAchievementCompletedID = "";
         }
     }
 
@@ -50,7 +67,9 @@ public class AchievementManager : MonoBehaviour
     private void OnAchievementCompleted(SSO_Achievement achievement)
     {
         rsoContentSaved.Value.achievementsIdCompleted.Add(achievement.AchievementId);
-        rsoAchievementComplete.Value = achievement;
+        
+        rsoAchievementRuntimeData.Value.lastAchievementCompletedID = achievement.AchievementId;
+        
         if (!achievement.achievementOnReaload) rseTriggerAchievement.Call();
         achievement.UnbindEventCheck();
         achievement.OnAchievementComplete -= OnAchievementCompleted;
@@ -58,6 +77,7 @@ public class AchievementManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (rsoAchievementComplete.Value && !rsoAchievementComplete.Value.achievementOnReaload) rsoAchievementComplete.Value = null;
+        rsoContentSaved.Value.lastAchievementCompletedId = rsoAchievementRuntimeData.Value.lastAchievementCompletedID;
+        rsoAchievementRuntimeData.Value = null;
     }
 }

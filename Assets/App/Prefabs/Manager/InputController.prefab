@@ -52,6 +52,8 @@ MonoBehaviour:
     type: 2}
   rseInputJump: {fileID: 11400000, guid: b36dc25aab8a1264fb63e454cc403d3c, type: 2}
   rseInputSprint: {fileID: 11400000, guid: 18ad135768700244cab4c5345fc53f44, type: 2}
+  rseInputAchievement: {fileID: 11400000, guid: 403ece7eed17e96438ce3c5249cda7e2,
+    type: 2}
 --- !u!114 &967496351620363899
 MonoBehaviour:
   m_ObjectHideFlags: 0
