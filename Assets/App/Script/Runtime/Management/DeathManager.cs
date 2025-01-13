@@ -9,6 +9,7 @@ public class DeathManager : MonoBehaviour
     [Header("Input")] 
     [SerializeField] private RSE_Death rseDeath;
     [Header("Output")]
+    [SerializeField] private RSE_SaveData rseSaveData;
     [SerializeField] private RSE_LoadScene rseLoadScene;
     [SerializeField] private RSE_TriggerAnimation rseTriggerAnimation;
     
@@ -19,8 +20,8 @@ public class DeathManager : MonoBehaviour
 
     private void OnDeath()
     {
-        rseTriggerAnimation.Call("FadeIn");
-        StartCoroutine(Utils.Delay(deathDelay,()=>rseLoadScene.Call(sceneToLoadOnDeath)));
+        rseSaveData.Call();
+        rseLoadScene.Call(sceneToLoadOnDeath);
     }
     
 }

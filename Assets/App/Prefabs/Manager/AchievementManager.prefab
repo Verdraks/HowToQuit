@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181948851482214944}
   - component: {fileID: 3312544876307449729}
+  - component: {fileID: 1841895128010350754}
   m_Layer: 0
   m_Name: AchievementManager
   m_TagString: Untagged
@@ -44,9 +45,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22ba716c5c34d44a04daf7822ceb114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achievements: []
+  achievements:
+  - {fileID: 11400000, guid: 09fab2a1746194b4a9e02ce7a14506ac, type: 2}
+  - {fileID: 11400000, guid: 16748f85b88d4224db0dba52c5344477, type: 2}
   rsoContentSaved: {fileID: 11400000, guid: e7ba5a2bfc8624b4baa4d8d1733f4823, type: 2}
   rseTriggerAchievement: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493,
     type: 2}
   rsoAchievementComplete: {fileID: 11400000, guid: ff67fba6a38362441833055dca03deff,
     type: 2}
+--- !u!114 &1841895128010350754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520293534872069898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879436d99a599aa468535a89aef642d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 0059744ef8ca9cd44b1b99714507d617, type: 3}
+  volume: 1
+  rseInput: {fileID: 11400000, guid: b44d5b718e6bf2142939ef7bb1f39493, type: 2}
+  rsePlayClip: {fileID: 11400000, guid: 5fa1e855424dd924da0f0597457cb8ed, type: 2}

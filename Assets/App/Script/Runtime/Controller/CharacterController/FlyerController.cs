@@ -12,7 +12,8 @@ public class FlyerController : PhysicController
     [SerializeField] private float flySpeed;
     
     [Header("Ouput")]
-    [SerializeField] UnityEvent onAbilityFlyStateChange;
+    [SerializeField] UnityEvent onAbilityFlyStart;
+    [SerializeField] UnityEvent onAbilityFlyEnd;
     
     private bool _isFlying;
     
@@ -66,7 +67,8 @@ public class FlyerController : PhysicController
         _isFlying = true;
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
-        onAbilityFlyStateChange.Invoke();
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        onAbilityFlyStart.Invoke();
     }
 
     private void DisableFlyingMode()
@@ -74,7 +76,7 @@ public class FlyerController : PhysicController
         _isFlying = false;
         rb.velocity = Vector3.zero;
         rb.useGravity = true;
-        onAbilityFlyStateChange.Invoke();
+        onAbilityFlyEnd.Invoke();
     }
 
     protected override void Update()

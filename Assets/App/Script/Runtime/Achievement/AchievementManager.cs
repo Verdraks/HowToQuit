@@ -25,12 +25,11 @@ public class AchievementManager : MonoBehaviour
                 ConnectAchievementNotifiers(index);
                 continue;
             }
+            bool find = false;
             foreach (var id in rsoContentSaved.Value.achievementsIdCompleted)
             {
-                if (id != achievements[index].AchievementId)
-                {
-                    ConnectAchievementNotifiers(index);
-                }
+                if (id == achievements[index].AchievementId){ find = true;}
+                if (!find) ConnectAchievementNotifiers(index);
             }
         }
         
