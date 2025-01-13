@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using BT.ScriptablesObject;
 using TMPro;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.SocialPlatforms.Impl;
 using Task = System.Threading.Tasks.Task;
 
 public class AchievementManager : MonoBehaviour
