@@ -14,10 +14,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Editor/ApplyMaterialEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Achievement/SSO_AchivementObject.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Component/TriggerBox.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/GUI/EventReceiver.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/GUI/EventReceiverString.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/GUI/RSE_TriggerAnimation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/CustomSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/RSE_LoadScene.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/App/Script/Runtime/Management/ReloadManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -93,6 +95,8 @@
       <workItem from="1736697284951" duration="1730000" />
       <workItem from="1736701399295" duration="9438000" />
       <workItem from="1736714499976" duration="833000" />
+      <workItem from="1736721994869" duration="6534000" />
+      <workItem from="1736729733992" duration="666000" />
     </task>
     <servers />
   </component>

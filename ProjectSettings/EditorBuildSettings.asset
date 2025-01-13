@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/App/Scenes/Gym/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/App/Scenes/Game/IntroScene.unity
+    guid: 38b81a2338a027a46bbef7a7b9a58e08
+  - enabled: 1
+    path: Assets/App/Scenes/Game/GameScene.unity
+    guid: 331ae9d4a652dee4788ceac660c4e4f4
+  - enabled: 1
+    path: Assets/App/Scenes/Game/ReloadScene.unity
+    guid: 93aba4ab85df6b84dbab742ed9745049
   m_configObjects: {}

@@ -12,6 +12,8 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] private SSO_Achievement[] achievements;
     [Header("References")]
     [SerializeField] private RSO_ContentSaved rsoContentSaved;
+    [Header("Output")]
+    [SerializeField] private RSE_TriggerAchievement rseTriggerAnimation;
     
     private void Awake()
     {

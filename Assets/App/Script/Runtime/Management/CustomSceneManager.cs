@@ -14,10 +14,8 @@ public class CustomSceneManager : MonoBehaviour
 
     private void LoadScene(string sceneName)
     {
-        if (!_sceneCurrentlyLoaded) return;
+        if (_sceneCurrentlyLoaded) return;
         _sceneCurrentlyLoaded = true;
-        
-        
         StartCoroutine(Utils.LoadSceneAsync(sceneName, LoadSceneMode.Single,OnSceneLoaded));
     }
     
