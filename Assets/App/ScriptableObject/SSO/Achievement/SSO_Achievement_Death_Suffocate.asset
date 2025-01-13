@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SSO_Achievement_Death_Suffocate
   m_EditorClassIdentifier: 
   achievementName: Suffocate
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
+  achievementDescription: A wall is not an appropriate place to live ...
+  achievementIcon: {fileID: 21300000, guid: 6f95948422ece3749a30217bea7de54e, type: 3}
   achievementId: suffocate
   achievementOnReaload: 1
   valueTarget: Suffocate

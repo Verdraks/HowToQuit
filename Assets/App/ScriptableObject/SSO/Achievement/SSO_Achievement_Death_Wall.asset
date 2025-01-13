@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f703302a64321984e9764d7777070559, type: 3}
   m_Name: SSO_Achievement_Death_Wall
   m_EditorClassIdentifier: 
-  achievementName: Wall
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
+  achievementName: The great Wall
+  achievementDescription: Does it not look familiary
+  achievementIcon: {fileID: 21300000, guid: dbe00488c5bdeef498cd2a6398ccc0fc, type: 3}
   achievementId: walldeath
   achievementOnReaload: 1
   valueTarget: Wall

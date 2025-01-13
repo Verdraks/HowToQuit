@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SSO_Achievement_Teleport
   m_EditorClassIdentifier: 
   achievementName: TeleportBack
-  achievementDescription: You fall in the void
-  achievementIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  achievementDescription: You fall in the void, again ...
+  achievementIcon: {fileID: 21300000, guid: cca86c7a145bb1d4eaad8dbe3550e8a2, type: 3}
   achievementId: teleportback
   achievementOnReaload: 0
   rse: {fileID: 11400000, guid: 8cf88b3dca646ff4691a57018e0bdcc5, type: 2}

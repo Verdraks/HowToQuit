@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f703302a64321984e9764d7777070559, type: 3}
   m_Name: SSO_Achievement_Death_Sun
   m_EditorClassIdentifier: 
-  achievementName: Sun
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
+  achievementName: Icare
+  achievementDescription: That's not becuse you have a rocket that you can do the
+    same thing !
+  achievementIcon: {fileID: 21300000, guid: 4346749969fbddb4b8371048eee87c8a, type: 3}
   achievementId: sundeath
   achievementOnReaload: 1
   valueTarget: Sun

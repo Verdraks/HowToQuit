@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbcb0bb689f80240a6de3e712eaa144, type: 3}
   m_Name: SSO_Achievement_Quit
   m_EditorClassIdentifier: 
-  achievementName: Quit
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
-  achievementId: quit
+  achievementName: Weird Panel
+  achievementDescription: That weird i fthought i delete this panel
+  achievementIcon: {fileID: 21300000, guid: 8645e7400b8469b42913eeb4cdba81f7, type: 3}
+  achievementId: weridPanel
   achievementOnReaload: 1
   rse: {fileID: 11400000, guid: 56ec890ac581e3e4a80b9defb7dfc54d, type: 2}

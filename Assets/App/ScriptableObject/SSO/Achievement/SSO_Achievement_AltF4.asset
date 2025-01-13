@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievementName: AltF4
   achievementDescription: That's a nice secret
-  achievementIcon: {fileID: 21300000, guid: cdea745d57535754f9ee6369d34549a3, type: 3}
+  achievementIcon: {fileID: 21300000, guid: a411105f6fed3ad4aaf2a701727c218b, type: 3}
   achievementId: altf4
   achievementOnReaload: 1
   rse: {fileID: 11400000, guid: 01d73f795fa230447aee4099229a0d40, type: 2}

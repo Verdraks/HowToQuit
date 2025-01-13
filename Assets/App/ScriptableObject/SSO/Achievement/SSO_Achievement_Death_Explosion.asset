@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SSO_Achievement_Death_Explosion
   m_EditorClassIdentifier: 
   achievementName: Explosion
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
+  achievementDescription: Oh noo, you should take it more care the next time !
+  achievementIcon: {fileID: 21300000, guid: d6d322c27dc91f54e8ed825ed06c8cd1, type: 3}
   achievementId: explostiondeath
   achievementOnReaload: 1
   valueTarget: Explosion

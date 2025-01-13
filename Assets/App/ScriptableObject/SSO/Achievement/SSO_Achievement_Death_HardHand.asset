@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SSO_Achievement_Death_HardHand
   m_EditorClassIdentifier: 
   achievementName: HardHand
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
+  achievementDescription: That hurt so much, you are not Hulk...
+  achievementIcon: {fileID: 21300000, guid: bb74007dac82ec1479817bf912e53df5, type: 3}
   achievementId: hardhand
   achievementOnReaload: 1
   valueTarget: HardHand

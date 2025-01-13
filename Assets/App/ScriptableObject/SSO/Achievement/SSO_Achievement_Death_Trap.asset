@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SSO_Achievement_Death_Trap
   m_EditorClassIdentifier: 
   achievementName: Trap
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
+  achievementDescription: You'r been trapped, looser.
+  achievementIcon: {fileID: 21300000, guid: 2e15e7704c33edf4bb1a749496aebd56, type: 3}
   achievementId: trapdeath
   achievementOnReaload: 1
   valueTarget: Trap

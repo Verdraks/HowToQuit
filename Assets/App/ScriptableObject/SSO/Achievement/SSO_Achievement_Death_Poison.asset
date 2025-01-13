@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f703302a64321984e9764d7777070559, type: 3}
   m_Name: SSO_Achievement_Death_Poison
   m_EditorClassIdentifier: 
-  achievementName: Poison
-  achievementDescription: 
-  achievementIcon: {fileID: 0}
+  achievementName: Poisoned
+  achievementDescription: You reality think mushroom are comestible ?
+  achievementIcon: {fileID: 21300000, guid: fed27cef1806ba844a6d1775852f1b71, type: 3}
   achievementId: poisondeath
   achievementOnReaload: 1
   valueTarget: Poison
